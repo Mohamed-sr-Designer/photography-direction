@@ -4,9 +4,17 @@ A premium editorial production brief, built to be sent to an external photograph
 before a shoot. It is a website, not a PDF: one long scrolling document with a
 sticky section nav and an interactive shot checklist.
 
-**Current state: wireframe.** Every image on the page is a CSS placeholder frame
-with a slot code, an aspect ratio and a caption. No photography and no stock
-imagery has been added, by request.
+**Images: AI generated direction references.** All 36 reference frames were
+generated with **Google Nano Banana 2** at 1K and enhanced through **Magnific**
+(Precision / photo mode, 2x, zero creativity so nothing is hallucinated into the
+architecture). They are labelled `AI reference` on the page.
+
+> These are not photographs of the project and not photographs of any real place.
+> They exist to agree the look, the framing and the light before the shoot.
+> The photographer matches the treatment, not the building.
+
+Any frame can still be swapped for a real photograph, or back to a wireframe, in
+one line — see *Swapping images* below.
 
 ---
 
@@ -86,29 +94,49 @@ They currently read `[ PROJECT / DEVELOPMENT NAME ]` and `[ CLIENT / BRAND ]`.
 
 ---
 
-## Adding the real images later
+## Swapping images
 
-Every placeholder prints its slot code in the top left corner (`MP-R1`, `AR-R2`,
-`REF-01`). To swap a placeholder for a real photograph, add one line to the
-`IMAGES` map at the top of `data.js`:
+Every frame prints its slot code in the top left corner (`MP-R1`, `AR-R2`,
+`REF-01`). The `IMAGES` map at the top of `data.js` maps that code to a file:
 
 ```js
 const IMAGES = {
-  'MP-R1': 'assets/img/masterplan/hero-aerial.jpg',
-  'AR-R1': 'assets/img/architecture/hero.jpg',
+  'MP-R1': 'assets/img/masterplan/mp-r1.jpg',
 };
 ```
 
-Anything not listed stays a wireframe, so images can be dropped in one at a time
-as they are prepared. The frame keeps its aspect ratio and the image is
-`object-fit: cover`, so nothing in the layout shifts.
+- **Replace with a real photo** — point the same key at the new file.
+- **Revert a frame to a wireframe** — delete or comment out its line. Anything
+  not listed renders as a placeholder, so the two modes can be mixed freely.
 
-Suggested folders under `assets/img/`:
+The frame keeps its aspect ratio and the image is `object-fit: cover`, so nothing
+in the layout shifts either way.
+
+Folders under `assets/img/`:
 
 ```
-hero  masterplan  architecture  land  location
+ref  masterplan  architecture  land  location
 lifestyle  landscape  investment  details  drone  night
 ```
+
+### How the current set was produced
+
+| Step | Tool | Settings |
+|---|---|---|
+| Generate | Nano Banana 2 (`imagen-nano-banana-2-flash`) | 1K, aspect ratio per slot |
+| Enhance | Magnific | `ultra-photo`, 2x, `balanced` preset |
+| Web encode | ffmpeg | 1400 px long edge, Lanczos, q4 |
+
+Prompts follow the brief's own rules: straight verticals, natural colour, real
+light, negative space where the slot calls for it, people small and never looking
+at the lens, and an explicit *no text / no signage / no logos* clause so nothing
+renders garbled lettering.
+
+Cost was 75 credits per generation and 90 per Magnific pass, so 165 per image and
+about 5,940 for the full set of 36.
+
+Two prompts were rejected by the provider's safety filter as false positives (both
+21:9 aerials) and were regenerated with reworded copy.
 
 ---
 

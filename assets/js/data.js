@@ -41,8 +41,63 @@
    ========================================================================== */
 
 const IMAGES = {
-  // 'REF-01': 'assets/img/hero/architectural-reference.jpg',
-  // 'MP-R1' : 'assets/img/masterplan/hero-aerial.jpg',
+  /* Visual language */
+  'REF-01': 'assets/img/ref/ref-01.jpg',
+  'REF-02': 'assets/img/ref/ref-02.jpg',
+  'REF-03': 'assets/img/ref/ref-03.jpg',
+  'REF-04': 'assets/img/ref/ref-04.jpg',
+  'REF-05': 'assets/img/ref/ref-05.jpg',
+  'REF-06': 'assets/img/ref/ref-06.jpg',
+
+  /* 01 Masterplan */
+  'MP-R1': 'assets/img/masterplan/mp-r1.jpg',
+  'MP-R2': 'assets/img/masterplan/mp-r2.jpg',
+  'MP-R3': 'assets/img/masterplan/mp-r3.jpg',
+
+  /* 02 Architecture */
+  'AR-R1': 'assets/img/architecture/ar-r1.jpg',
+  'AR-R2': 'assets/img/architecture/ar-r2.jpg',
+  'AR-R3': 'assets/img/architecture/ar-r3.jpg',
+
+  /* 03 Land */
+  'LD-R1': 'assets/img/land/ld-r1.jpg',
+  'LD-R2': 'assets/img/land/ld-r2.jpg',
+  'LD-R3': 'assets/img/land/ld-r3.jpg',
+
+  /* 04 Location */
+  'LO-R1': 'assets/img/location/lo-r1.jpg',
+  'LO-R2': 'assets/img/location/lo-r2.jpg',
+  'LO-R3': 'assets/img/location/lo-r3.jpg',
+
+  /* 05 Lifestyle */
+  'LF-R1': 'assets/img/lifestyle/lf-r1.jpg',
+  'LF-R2': 'assets/img/lifestyle/lf-r2.jpg',
+  'LF-R3': 'assets/img/lifestyle/lf-r3.jpg',
+
+  /* 06 Landscape */
+  'LS-R1': 'assets/img/landscape/ls-r1.jpg',
+  'LS-R2': 'assets/img/landscape/ls-r2.jpg',
+  'LS-R3': 'assets/img/landscape/ls-r3.jpg',
+
+  /* 07 Investment */
+  'IN-R1': 'assets/img/investment/in-r1.jpg',
+  'IN-R2': 'assets/img/investment/in-r2.jpg',
+  'IN-R3': 'assets/img/investment/in-r3.jpg',
+
+  /* 08 Details */
+  'DT-R1': 'assets/img/details/dt-r1.jpg',
+  'DT-R2': 'assets/img/details/dt-r2.jpg',
+  'DT-R3': 'assets/img/details/dt-r3.jpg',
+
+  /* 09 Drone */
+  'DR-R1': 'assets/img/drone/dr-r1.jpg',
+  'DR-R2': 'assets/img/drone/dr-r2.jpg',
+  'DR-R3': 'assets/img/drone/dr-r3.jpg',
+
+  /* 10 Night */
+  'NT-R1': 'assets/img/night/nt-r1.jpg',
+  'NT-R2': 'assets/img/night/nt-r2.jpg',
+  'NT-R3': 'assets/img/night/nt-r3.jpg'
 };
 
 const BRIEF = {

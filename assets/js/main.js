@@ -27,7 +27,10 @@
 
     var box = src
       ? '<div class="frame__box frame__box--img" style="--ar:' + ar(ref.ratio) + '">' +
-          '<img src="' + esc(src) + '" alt="' + esc(ref.label) + '" loading="lazy">' +
+          '<img src="' + esc(src) + '" alt="Direction reference: ' + esc(ref.label) + '" loading="lazy">' +
+          '<span class="frame__code frame__code--on">' + esc(ref.code) + '</span>' +
+          '<span class="frame__ratio frame__ratio--on">' + esc(ref.ratio) + '</span>' +
+          '<span class="frame__ai" title="AI generated direction reference, not a photograph of the project">AI reference</span>' +
         '</div>'
       : '<div class="frame__box" style="--ar:' + ar(ref.ratio) + '">' +
           '<span class="frame__code">' + esc(ref.code) + '</span>' +
