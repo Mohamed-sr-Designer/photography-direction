@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Real Estate Photography Direction — Shot Brief</title>
-<meta name="description" content="Photography shot brief for real estate development. 36 images per category, 360 per project. Look at the frames, shoot the list.">
+<title>Real Estate Photography Direction</title>
+<meta name="description" content="Photography direction for real estate development. Four sections, 36 photos each, 144 per project.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0C1B2E">
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
@@ -17,16 +17,12 @@
 
 <div class="scrollbar" aria-hidden="true"><div class="scrollbar__fill" id="progress"></div></div>
 
-<!-- ═══════════════════════════════════════════════════════ NAV ═══ -->
 <header class="nav" id="nav">
   <div class="nav__in">
     <a class="nav__brand" href="#top" aria-label="Top">
       <img src="assets/img/logo.svg" alt="" width="253" height="44">
     </a>
     <nav class="nav__links" id="navLinks" aria-label="Sections"></nav>
-    <a class="nav__count" href="#checklist">
-      <span class="nav__countnum" id="navCount">0/360</span>
-    </a>
     <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
       <span></span><span></span>
     </button>
@@ -37,90 +33,51 @@
 
 <main id="top">
 
-<!-- ══════════════════════════════════════════════════════ HERO ═══ -->
-<section class="hero">
-  <div class="hero__bg" aria-hidden="true"><div class="hero__grid"></div></div>
-  <div class="hero__in">
-    <span class="hero__kick">Production Brief · <span id="heroVer"></span></span>
-    <h1 class="hero__h1">Photography<br><span class="is-accent">Direction</span></h1>
-    <p class="hero__lede">Look at the frames. Shoot the list.</p>
-    <div class="hero__stats">
-      <div class="hstat hstat--hero"><b>36</b><span>images<br>per category</span></div>
-      <div class="hstat"><b>10</b><span>categories</span></div>
-      <div class="hstat"><b>360</b><span>images<br>per project</span></div>
+  <section class="hero">
+    <div class="hero__bg" aria-hidden="true"><div class="hero__grid"></div></div>
+    <div class="hero__in">
+      <span class="hero__kick" id="heroKick"></span>
+      <h1 class="hero__h1">Photography<br><span class="is-accent">Direction</span></h1>
+      <p class="hero__lede">Four sections. Thirty six photos each.</p>
+      <p class="hero__total"><b id="heroTotal">144</b><span>photos<br>per project</span></p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ══════════════════════════════════════════════════ RULE BAR ═══ -->
-<section class="rulebar">
-  <div class="shell rulebar__in">
-    <p class="rulebar__eq"><b>36</b> per category <i>×</i> <b>10</b> categories <i>=</i> <b>360</b> images</p>
-    <p class="rulebar__note">Spread the 36 across the matrix. Never 36 versions of one frame.</p>
-  </div>
-</section>
+  <div id="sections"></div>
 
-<!-- ═══════════════════════════════════ CATEGORIES (generated) ═══ -->
-<div id="cats"></div>
-
-<!-- ═════════════════════════════════════════ QUICK REFERENCE ════ -->
-<section class="sec sec--dark" id="rules">
-  <div class="shell">
-    <h2 class="strip__h">Light</h2>
-    <div class="timeline" id="timeline"></div>
-
-    <h2 class="strip__h">Ratios · shoot each hero subject in all five</h2>
-    <div class="ratios__row" id="ratioRow"></div>
-
-    <div class="rules">
-      <div>
-        <h3 class="rules__h">Every frame</h3>
-        <ul class="rules__list" id="ruleFrame"></ul>
-      </div>
-      <div>
-        <h3 class="rules__h">Files</h3>
-        <ul class="rules__list" id="ruleFiles"></ul>
-      </div>
-      <div>
-        <h3 class="rules__h rules__h--no">Never</h3>
-        <ul class="rules__list rules__list--no" id="ruleNo"></ul>
-      </div>
-    </div>
-
-    <p class="bigrule">Shoot wider than the final crop.</p>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════ CHECKLIST ════ -->
-<section class="sec sec--pad" id="checklist">
-  <div class="shell">
-    <div class="prog" id="prog">
-      <div class="prog__top">
-        <p class="prog__count"><span id="progNum">0 / 360</span> <em>frames</em></p>
-        <div class="prog__acts">
-          <button type="button" class="btn btn--ghost" id="expandAll">Expand all</button>
-          <button type="button" class="btn btn--ghost" id="resetAll">Reset</button>
+  <section class="sec sec--dark" id="rules">
+    <div class="shell">
+      <div class="rules">
+        <div class="rules__col">
+          <h2 class="rules__h">Light</h2>
+          <ul class="light" id="light"></ul>
+        </div>
+        <div class="rules__col">
+          <h2 class="rules__h">Ratios</h2>
+          <div class="ratios" id="ratios"></div>
+          <p class="rules__note">Every hero subject in all five. Shot on location, not cropped after.</p>
         </div>
       </div>
-      <div class="prog__bar"><div class="prog__fill" id="progFill"></div></div>
-      <div class="prog__meta">
-        <span><b id="progShots">0</b>/<span id="progShotsTotal">110</span> shots</span>
-        <span><b id="progCats">0</b>/<span id="progCatsTotal">10</span> categories</span>
-        <span id="progPct">0%</span>
+      <div class="rules rules--two">
+        <div class="rules__col">
+          <h2 class="rules__h">Deliver</h2>
+          <ul class="list" id="deliver"></ul>
+        </div>
+        <div class="rules__col">
+          <h2 class="rules__h rules__h--no">Never</h2>
+          <ul class="list list--no" id="never"></ul>
+        </div>
       </div>
+      <p class="bigrule">Shoot wider than the final crop.</p>
     </div>
-    <div class="checklist" id="checklistWrap"></div>
-  </div>
-</section>
+  </section>
 
 </main>
 
-<!-- ══════════════════════════════════════════════════ FOOTER ════ -->
 <footer class="foot">
-  <div class="shell foot__in">
+  <div class="shell">
     <img src="assets/img/logo.svg" alt="" width="253" height="44">
     <p class="foot__title">Real Estate<br>Photography Direction</p>
-    <p class="foot__note">A complete visual asset library. Not a collection of nice images.</p>
     <p class="foot__meta" id="footMeta"></p>
   </div>
 </footer>
