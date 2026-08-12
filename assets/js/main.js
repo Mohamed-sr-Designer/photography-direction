@@ -72,7 +72,7 @@
 
   function renderRules() {
     set('#light', RULES.light.map(function (l) {
-      return '<li><b>' + esc(l.t) + '</b><span>' + esc(l.w) + '</span><i>' + esc(l.f) + '</i></li>';
+      return '<li><b>' + esc(l.t) + '</b><i>' + esc(l.f) + '</i></li>';
     }).join(''));
 
     set('#ratios', RATIOS.map(function (r) {
@@ -87,9 +87,29 @@
 
     var k = $('#heroKick');
     if (k) k.textContent = META.document + ' · ' + META.version + ' · ' + META.date;
-    var t = $('#heroTotal'); if (t) t.textContent = TOTAL;
-    var f = $('#footMeta');
-    if (f) f.textContent = META.project + ' · ' + META.version + ' · ' + META.date;
+
+    // Counted from the data so adding a section can never leave this stale.
+    var words = ['Zero','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten'];
+    var lede = $('#heroLede');
+    if (lede) {
+      lede.textContent = (words[SECTIONS.length] || SECTIONS.length) + ' sections. ' +
+                         SECTIONS[0].formula.total + ' photos each.';
+    }
+
+    // Final tally, added up from the sections rather than typed in.
+    set('#total',
+      '<div class="total__sum rv">' +
+        '<span class="total__part"><b>' + SECTIONS.length + '</b><i>Sections</i></span>' +
+        '<span class="total__op">&times;</span>' +
+        '<span class="total__part"><b>' + SECTIONS[0].formula.total + '</b><i>Photos each</i></span>' +
+        '<span class="total__op total__op--eq">=</span>' +
+        '<span class="total__grand"><b>' + TOTAL + '</b><i>Photos per project</i></span>' +
+      '</div>' +
+      '<ul class="total__rows rv">' +
+        SECTIONS.map(function (s) {
+          return '<li><em>' + esc(s.n) + '</em>' + esc(s.title) + '<b>' + s.formula.total + '</b></li>';
+        }).join('') +
+      '</ul>');
   }
 
   /* --------------------------------------------------------- behaviour --- */

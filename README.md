@@ -11,11 +11,16 @@ from which angles — so nothing needs a written shot-by-shot list.
 
 | Section | Formula | Photos |
 |---|---|---|
-| 01 Masterplan | 3 altitudes × 2 orientations × 3 angles × 2 light | 36 |
-| 02 Architecture | 3 buildings × 2 orientations × 3 angles × 2 distances | 36 |
-| 03 Interiors | 3 spaces × 2 orientations × 3 distances × 2 light | 36 |
-| 04 Lifestyle | 3 scenes × 2 orientations × 3 distances × 2 versions | 36 |
-| **Total** | | **144** |
+| 01 Masterplan | 3 angles × 2 light × 5 ratios | 30 |
+| 02 Architecture | 3 angles × 2 distances × 5 ratios | 30 |
+| 03 Interiors | 3 spaces × 2 distances × 5 ratios | 30 |
+| 04 Drone | 3 sides × 2 shots (mid/wide) × 5 ratios | 30 |
+| 05 Lifestyle | 3 scenes × 2 versions × 5 ratios | 30 |
+| **Total** | | **150** |
+
+The five delivery ratios are a counted factor in every formula, because the
+brief requires each hero subject to be shot in all five on location rather than
+cropped afterwards.
 
 ---
 

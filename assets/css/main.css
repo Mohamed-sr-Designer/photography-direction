@@ -99,20 +99,22 @@ h1,h2{font-weight:600;line-height:1;letter-spacing:-.04em;font-stretch:94%}
 .hero__h1{margin-top:1rem;font-size:clamp(2.5rem,9.5vw,7.5rem);line-height:.86;letter-spacing:-.05em;text-transform:uppercase;font-stretch:90%}
 .hero__h1 .is-accent{color:var(--orange)}
 .hero__lede{margin-top:1.1rem;font-size:clamp(1rem,1.5vw,1.3rem);color:var(--ink-inv-2)}
-.hero__total{margin-top:clamp(1.6rem,4vh,2.6rem);display:flex;align-items:baseline;gap:.8rem}
-.hero__total b{font-size:clamp(2.6rem,6vw,5rem);font-weight:600;letter-spacing:-.05em;color:var(--orange)}
-.hero__total span{font-family:var(--mono);font-size:.6rem;line-height:1.4;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-inv-2)}
-
-/* Ratios live in the hero: the format rule is read before anything else. */
-.hratios{margin-top:clamp(1.6rem,4vh,2.4rem);padding-top:clamp(1.2rem,3vh,1.8rem);border-top:1px solid rgba(255,255,255,.16)}
+/* Ratios and casting sit side by side in the hero: both format and casting
+   rules are read before any section. */
+.herofoot{
+  margin-top:clamp(1.6rem,4vh,2.6rem);padding-top:clamp(1.2rem,3vh,1.8rem);
+  border-top:1px solid rgba(255,255,255,.16);
+  display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);
+  gap:clamp(1.4rem,4vw,3.5rem);align-items:start;
+}
 .hratios__h{font-family:var(--mono);font-size:.62rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:.9rem}
 .hratios__row{display:flex;flex-wrap:wrap;gap:clamp(.6rem,1.6vw,1.4rem);align-items:flex-end}
 .hratios__row .rf__box{border-color:rgba(255,255,255,.4);color:var(--ink-inv-2);background:rgba(255,255,255,.04)}
 .hratios__row .rf figcaption{color:#6E8299}
-.hratios__note{margin-top:.8rem;font-size:.82rem;color:var(--ink-inv-2)}
-.hero__cast{
-  margin-top:1.1rem;font-size:.82rem;line-height:1.5;color:var(--ink-inv-2);
-  padding-left:.9rem;border-left:2px solid var(--orange);max-width:56ch;
+.hratios__note{margin-top:.8rem;font-size:.8rem;color:var(--ink-inv-2);max-width:46ch}
+.hcast__b{
+  font-size:.85rem;line-height:1.55;color:var(--ink-inv-2);
+  padding-left:.9rem;border-left:2px solid var(--orange);
 }
 
 /* --------------------------------------------------------- 5. Section --- */
@@ -149,8 +151,10 @@ h1,h2{font-weight:600;line-height:1;letter-spacing:-.04em;font-stretch:94%}
 .tile{
   position:relative;aspect-ratio:4 / 3;overflow:hidden;
   background:var(--paper-2);border:1px solid var(--line-2);
-  display:grid;place-items:center;padding:6px;
 }
+/* Sources are generated at exactly 4:3, so the photo fills the card with
+   nothing cropped and no letterboxing. contain keeps that true if a future
+   image arrives at a different shape. */
 .tile img{width:100%;height:100%;object-fit:contain}
 .tile__ai{
   position:absolute;right:8px;top:8px;font-family:var(--mono);font-size:.48rem;
@@ -168,7 +172,6 @@ h1,h2{font-weight:600;line-height:1;letter-spacing:-.04em;font-stretch:94%}
 
 .light li{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem .8rem;padding:.5rem 0;border-bottom:1px solid var(--line)}
 .light b{font-size:.95rem;font-weight:600;min-width:6.5rem}
-.light span{font-family:var(--mono);font-size:.58rem;letter-spacing:.08em;color:var(--orange)}
 .light i{font-style:normal;font-size:.8rem;color:var(--ink-3);margin-left:auto}
 
 .ratios{display:flex;flex-wrap:wrap;gap:.8rem;align-items:flex-end}
@@ -185,11 +188,20 @@ h1,h2{font-weight:600;line-height:1;letter-spacing:-.04em;font-stretch:94%}
   padding-top:clamp(1.4rem,3vh,2.2rem);border-top:1px solid var(--line-2);
 }
 
-/* ---------------------------------------------------------- 9. Footer --- */
-.foot{background:var(--deep);color:var(--ink-inv);padding-block:clamp(2.4rem,6vh,3.6rem)}
-.foot img{width:126px;filter:brightness(0) invert(1);opacity:.85}
-.foot__title{margin-top:1.3rem;font-size:clamp(1.3rem,3.2vw,2.4rem);font-weight:600;letter-spacing:-.04em;line-height:1;text-transform:uppercase;font-stretch:92%}
-.foot__meta{margin-top:1.2rem;font-family:var(--mono);font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:#6E8299}
+/* ----------------------------------------------------------- 9. Total --- */
+.total{margin-top:clamp(2.4rem,6vh,3.6rem);padding-top:clamp(1.6rem,4vh,2.4rem);border-top:1px solid var(--line-2)}
+.total__sum{display:flex;flex-wrap:wrap;align-items:flex-end;gap:.6rem clamp(.8rem,2vw,1.6rem)}
+.total__part{display:flex;flex-direction:column;gap:.3rem}
+.total__part b{font-size:clamp(1.6rem,3vw,2.4rem);font-weight:600;letter-spacing:-.04em;line-height:1}
+.total__part i,.total__grand i{font-family:var(--mono);font-style:normal;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.total__op{font-size:1.2rem;color:var(--ink-3);padding-bottom:.2rem}
+.total__op--eq{color:var(--orange);font-weight:600}
+.total__grand{display:flex;flex-direction:column;gap:.3rem}
+.total__grand b{font-size:clamp(2.8rem,7vw,5.4rem);font-weight:600;letter-spacing:-.05em;line-height:.9;color:var(--orange)}
+.total__rows{margin-top:clamp(1.4rem,3vh,2rem);display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line-2);border:1px solid var(--line-2)}
+.total__rows li{background:var(--deep);display:flex;align-items:baseline;gap:.5rem;padding:.7rem .8rem;font-size:.85rem;font-weight:500}
+.total__rows em{font-family:var(--mono);font-style:normal;font-size:.56rem;color:var(--orange)}
+.total__rows b{margin-left:auto;font-family:var(--mono);font-size:.8rem;color:var(--ink-inv)}
 
 /* --------------------------------------------- 10. Motion & responsive --- */
 .rv{opacity:0;transform:translateY(14px)}
@@ -199,6 +211,7 @@ h1,h2{font-weight:600;line-height:1;letter-spacing:-.04em;font-stretch:94%}
   .nav__links{display:none}
   .nav__toggle{display:block}
   .rules{grid-template-columns:1fr;gap:2rem}
+  .herofoot{grid-template-columns:1fr;gap:1.6rem}
 }
 @media (max-width:640px){
   html{scroll-padding-top:60px}

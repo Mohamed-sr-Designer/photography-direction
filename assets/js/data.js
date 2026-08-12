@@ -13,7 +13,7 @@ const META = {
   project:  "[ PROJECT / DEVELOPMENT NAME ]",
   client:   "[ CLIENT / BRAND ]",
   document: "Photography Direction",
-  version:  "V3.0",
+  version:  "V4.0",
   date:     "August 2026"
 };
 
@@ -41,22 +41,21 @@ const SECTIONS = [
     keywords: ["Aerial", "Scale", "Context", "Access", "Planning"],
     formula: {
       parts: [
-        { v: "3", l: "Altitudes<br>High · Mid · Low" },
-        { v: "2", l: "Orientations<br>Landscape · Portrait" },
         { v: "3", l: "Angles<br>90° · 45° · Wide" },
-        { v: "2", l: "Light<br>Day · Golden hour" }
+        { v: "2", l: "Light<br>Day · Golden hour" },
+        { v: "5", l: "Ratios<br>21:9 · 16:9 · 4:5 · 1:1 · 9:16" }
       ],
-      total: 36
+      total: 30
     },
     images: [
-      "assets/img/plan/drone-wide/drone-wide-01.jpg",
-      "assets/img/plan/drone-90/drone-90-01.jpg",
-      "assets/img/plan/drone-90/drone-90-08.jpg",
-      "assets/img/plan/drone-90/drone-90-10.jpg",
-      "assets/img/plan/perspective/perspective-01.jpg",
-      "assets/img/plan/perspective/perspective-04.jpg"
+      "assets/img/sec/mp-1.jpg",
+      "assets/img/sec/mp-2.jpg",
+      "assets/img/sec/mp-3.jpg",
+      "assets/img/sec/mp-4.jpg",
+      "assets/img/sec/mp-5.jpg",
+      "assets/img/sec/mp-6.jpg"
     ],
-    source: "real"
+    source: "ai"
   },
   {
     n: "02",
@@ -67,20 +66,19 @@ const SECTIONS = [
     keywords: ["Straight Verticals", "Negative Space", "Materials", "Entrance"],
     formula: {
       parts: [
-        { v: "3", l: "Buildings<br>or facades" },
-        { v: "2", l: "Orientations<br>Landscape · Portrait" },
         { v: "3", l: "Angles<br>Front · ¾ · Low" },
-        { v: "2", l: "Distances<br>Wide · Detail" }
+        { v: "2", l: "Distances<br>Wide · Detail" },
+        { v: "5", l: "Ratios<br>21:9 · 16:9 · 4:5 · 1:1 · 9:16" }
       ],
-      total: 36
+      total: 30
     },
     images: [
-      "assets/img/architecture/ar-r1.jpg",
-      "assets/img/architecture/ar-r5.jpg",
-      "assets/img/architecture/ar-r2.jpg",
-      "assets/img/architecture/ar-r4.jpg",
-      "assets/img/architecture/ar-r6.jpg",
-      "assets/img/architecture/ar-r3.jpg"
+      "assets/img/sec/ar-1.jpg",
+      "assets/img/sec/ar-2.jpg",
+      "assets/img/sec/ar-3.jpg",
+      "assets/img/sec/ar-4.jpg",
+      "assets/img/sec/ar-5.jpg",
+      "assets/img/sec/ar-6.jpg"
     ],
     source: "ai"
   },
@@ -96,24 +94,49 @@ const SECTIONS = [
     formula: {
       parts: [
         { v: "3", l: "Spaces<br>per property type" },
-        { v: "2", l: "Orientations<br>Landscape · Portrait" },
-        { v: "3", l: "Distances<br>Wide · Medium · Detail" },
-        { v: "2", l: "Light<br>Day · Evening" }
+        { v: "2", l: "Distances<br>Wide · Detail" },
+        { v: "5", l: "Ratios<br>21:9 · 16:9 · 4:5 · 1:1 · 9:16" }
       ],
-      total: 36
+      total: 30
     },
     images: [
-      "assets/img/interior/it-r1.jpg",
-      "assets/img/interior/it-r2.jpg",
-      "assets/img/interior/it-r3.jpg",
-      "assets/img/interior/it-r4.jpg",
-      "assets/img/interior/it-r5.jpg",
-      "assets/img/interior/it-r6.jpg"
+      "assets/img/sec/it-1.jpg",
+      "assets/img/sec/it-2.jpg",
+      "assets/img/sec/it-3.jpg",
+      "assets/img/sec/it-4.jpg",
+      "assets/img/sec/it-5.jpg",
+      "assets/img/sec/it-6.jpg"
     ],
     source: "ai"
   },
   {
     n: "04",
+    title: "Drone",
+    body: "The architecture shot from the air. Two shot types only: a mid shot " +
+          "that fills the frame with the building, and a wide shot that places it " +
+          "in its plot. Fly the mid shot at 45° and the wide shot at 90°, and " +
+          "repeat both from three sides of the building.",
+    keywords: ["Mid Shot", "Wide Shot", "45°", "90°", "Rooftop"],
+    formula: {
+      parts: [
+        { v: "3", l: "Sides<br>rotate around" },
+        { v: "2", l: "Shots<br>Mid · Wide" },
+        { v: "5", l: "Ratios<br>21:9 · 16:9 · 4:5 · 1:1 · 9:16" }
+      ],
+      total: 30
+    },
+    images: [
+      "assets/img/sec/dr-1.jpg",
+      "assets/img/sec/dr-2.jpg",
+      "assets/img/sec/dr-3.jpg",
+      "assets/img/sec/dr-4.jpg",
+      "assets/img/sec/dr-5.jpg",
+      "assets/img/sec/dr-6.jpg"
+    ],
+    source: "ai"
+  },
+  {
+    n: "05",
     title: "Lifestyle",
     body: "The project is the hero. People are in the frame to give it scale and " +
           "make it feel used. Everyone is captured mid movement, never posed and " +
@@ -122,19 +145,18 @@ const SECTIONS = [
     formula: {
       parts: [
         { v: "3", l: "Scenes<br>walkway · plaza · green" },
-        { v: "2", l: "Orientations<br>Landscape · Portrait" },
-        { v: "3", l: "Distances<br>Wide · Medium · Close" },
-        { v: "2", l: "Versions<br>With people · Clean" }
+        { v: "2", l: "Versions<br>With people · Clean" },
+        { v: "5", l: "Ratios<br>21:9 · 16:9 · 4:5 · 1:1 · 9:16" }
       ],
-      total: 36
+      total: 30
     },
     images: [
-      "assets/img/lifestyle/lf-r1.jpg",
-      "assets/img/lifestyle/lf-r2.jpg",
-      "assets/img/lifestyle/lf-r3.jpg",
-      "assets/img/landscape/ls-r1.jpg",
-      "assets/img/landscape/ls-r2.jpg",
-      "assets/img/landscape/ls-r3.jpg"
+      "assets/img/sec/lf-1.jpg",
+      "assets/img/sec/lf-2.jpg",
+      "assets/img/sec/lf-3.jpg",
+      "assets/img/sec/lf-4.jpg",
+      "assets/img/sec/lf-5.jpg",
+      "assets/img/sec/lf-6.jpg"
     ],
     source: "ai"
   }
@@ -143,17 +165,13 @@ const SECTIONS = [
 /* Quick reference. One line each, no prose. */
 const RULES = {
   light: [
-    { t: "Daylight",    w: "09:00 — 15:00",     f: "Masterplan · Architecture" },
-    { t: "Golden hour", w: "45 min to sunset",  f: "Lifestyle · Campaigns" },
-    { t: "Blue hour",   w: "20 — 35 min after", f: "Hero · Luxury" },
-    { t: "Night",       w: "After full dark",   f: "Lighting · Entrances" }
+    { t: "Daylight",    f: "Masterplan · Architecture" },
+    { t: "Golden hour", f: "Lifestyle · Campaigns" },
+    { t: "Night",       f: "Lighting · Entrances" }
   ],
   deliver: [
     "RAW + JPG, full resolution",
-    "Natural colour, no presets",
     "6000 px long edge minimum",
-    "Straight verticals",
-    "Bracket interiors, entrances and blue hour",
     "One folder per section"
   ]
 };
