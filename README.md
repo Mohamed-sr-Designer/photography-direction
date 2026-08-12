@@ -13,22 +13,29 @@ from which angles — so nothing needs a written shot-by-shot list.
 |---|---|---|
 | 01 Masterplan | 3 altitudes × 2 orientations × 3 angles × 2 light | 36 |
 | 02 Architecture | 3 buildings × 2 orientations × 3 angles × 2 distances | 36 |
-| 03 Land & Plots | 3 plots × 2 orientations × 3 anchors × 2 distances | 36 |
+| 03 Interiors | 3 spaces × 2 orientations × 3 distances × 2 light | 36 |
 | 04 Lifestyle | 3 scenes × 2 orientations × 3 distances × 2 versions | 36 |
 | **Total** | | **144** |
 
 ---
 
+## Casting
+
+Everyone appearing in frame is Saudi: men in white thobe and shemagh, women in
+abaya. Unposed, mid movement, never facing the lens. This is stated in the hero
+so it is read before any section.
+
 ## Images
 
-24 images, six per section, all cropped to the same 4:3 tile so the set reads as
-one system.
+24 images, six per section. Each sits in the same 4:3 tile, but the photo is
+**fitted, never cropped** — the photographer sees the real composition and the
+real aspect ratio of every reference.
 
-- **Masterplan and Land & Plots** — real reference photographs supplied by the
+- **Masterplan** — real reference photographs supplied by the
   art director. Filtered down from 63: thumbnails under 600 px were dropped, and
   so was every frame carrying a listing overlay, a polygon markup, an agency logo
   or a visible watermark. Those are sales graphics, not photography references.
-- **Architecture and Lifestyle** — AI direction references, labelled
+- **Architecture, Interiors and Lifestyle** — AI direction references, labelled
   `AI reference` on the tile. Generated with Nano Banana 2, enhanced with
   Magnific (`ultra-photo`, 2x); later top-ups used Nano Banana 2 Lite with no
   Magnific pass to save credits.

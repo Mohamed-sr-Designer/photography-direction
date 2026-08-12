@@ -75,14 +75,15 @@
       return '<li><b>' + esc(l.t) + '</b><span>' + esc(l.w) + '</span><i>' + esc(l.f) + '</i></li>';
     }).join(''));
 
-    set('#ratios', RULES.ratios.map(function (r) {
+    set('#ratios', RATIOS.map(function (r) {
       return '<figure class="rf"><div class="rf__box" style="--ar:' + r.r.replace(':', ' / ') + '">' +
         esc(r.r) + '</div><figcaption>' + esc(r.l) + '</figcaption></figure>';
     }).join(''));
 
     var li = function (t) { return '<li>' + esc(t) + '</li>'; };
     set('#deliver', RULES.deliver.map(li).join(''));
-    set('#never',   RULES.never.map(li).join(''));
+
+    var cast = $('#casting'); if (cast) cast.textContent = CASTING;
 
     var k = $('#heroKick');
     if (k) k.textContent = META.document + ' · ' + META.version + ' · ' + META.date;

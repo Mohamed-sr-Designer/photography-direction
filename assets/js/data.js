@@ -3,8 +3,8 @@
    --------------------------------------------------------------------------
    Structure follows the reference deck: each section is a number, a short
    description, a keyword row, and a formula that computes its photo count.
-   The formula IS the shot list — it says how many subjects, in which
-   orientations, from which angles. Nothing else needs to be written down.
+   The formula IS the shot list — how many subjects, in which orientations,
+   from which angles. Nothing else needs writing down.
 
    To change the brief, edit this file only.
    ========================================================================== */
@@ -13,9 +13,22 @@ const META = {
   project:  "[ PROJECT / DEVELOPMENT NAME ]",
   client:   "[ CLIENT / BRAND ]",
   document: "Photography Direction",
-  version:  "V2.0",
+  version:  "V3.0",
   date:     "August 2026"
 };
+
+/* Shown in the hero: every hero subject is captured in all five. */
+const RATIOS = [
+  { r: "21:9", l: "Web hero" },
+  { r: "16:9", l: "Web / Ads" },
+  { r: "4:5",  l: "Feed" },
+  { r: "1:1",  l: "Square" },
+  { r: "9:16", l: "Reels" }
+];
+
+/* Anyone appearing in frame is Saudi: thobe and shemagh, or abaya. */
+const CASTING = "Everyone in frame is Saudi. Men in white thobe and shemagh, " +
+                "women in abaya. Unposed, mid movement, never facing the lens.";
 
 /* Every section delivers 36 photos. 4 sections = 144 photos per project. */
 const SECTIONS = [
@@ -73,29 +86,31 @@ const SECTIONS = [
   },
   {
     n: "03",
-    title: "Land & Plots",
-    body: "Empty ground photographed on its own reads as nothing. Every plot frame " +
-          "is anchored to something real: a road, a boundary, infrastructure or a " +
-          "finished building behind it.",
-    keywords: ["Plot in Context", "Boundaries", "Infrastructure", "Access Road"],
+    title: "Interiors",
+    body: "The building from the inside. For an office or headquarters: parking, " +
+          "reception and the working floors. For a villa: the living spaces, the " +
+          "furniture and the open American kitchen. For a compound: the shared " +
+          "amenities. Shoot each space wide, then medium, then the finish detail.",
+    keywords: ["Reception", "Office Floor", "Parking", "Living & Furniture",
+               "American Kitchen", "Amenities"],
     formula: {
       parts: [
-        { v: "3", l: "Plots<br>across the site" },
+        { v: "3", l: "Spaces<br>per property type" },
         { v: "2", l: "Orientations<br>Landscape · Portrait" },
-        { v: "3", l: "Anchors<br>Road · Boundary · Building" },
-        { v: "2", l: "Distances<br>Wide · Close" }
+        { v: "3", l: "Distances<br>Wide · Medium · Detail" },
+        { v: "2", l: "Light<br>Day · Evening" }
       ],
       total: 36
     },
     images: [
-      "assets/img/plan/eye-level/eye-level-08.jpg",
-      "assets/img/plan/eye-level/eye-level-01.jpg",
-      "assets/img/plan/eye-level/eye-level-02.jpg",
-      "assets/img/plan/eye-level/eye-level-05.jpg",
-      "assets/img/plan/low-angle/low-angle-06.jpg",
-      "assets/img/plan/perspective/perspective-03.jpg"
+      "assets/img/interior/it-r1.jpg",
+      "assets/img/interior/it-r2.jpg",
+      "assets/img/interior/it-r3.jpg",
+      "assets/img/interior/it-r4.jpg",
+      "assets/img/interior/it-r5.jpg",
+      "assets/img/interior/it-r6.jpg"
     ],
-    source: "real"
+    source: "ai"
   },
   {
     n: "04",
@@ -103,7 +118,7 @@ const SECTIONS = [
     body: "The project is the hero. People are in the frame to give it scale and " +
           "make it feel used. Everyone is captured mid movement, never posed and " +
           "never looking at the lens.",
-    keywords: ["Unposed", "Human Scale", "Golden Hour", "Landscape"],
+    keywords: ["Saudi Casting", "Unposed", "Human Scale", "Golden Hour"],
     formula: {
       parts: [
         { v: "3", l: "Scenes<br>walkway · plaza · green" },
@@ -128,33 +143,18 @@ const SECTIONS = [
 /* Quick reference. One line each, no prose. */
 const RULES = {
   light: [
-    { t: "Daylight",    w: "09:00 — 15:00",  f: "Masterplan · Architecture" },
-    { t: "Golden hour", w: "45 min to sunset", f: "Lifestyle · Campaigns" },
+    { t: "Daylight",    w: "09:00 — 15:00",     f: "Masterplan · Architecture" },
+    { t: "Golden hour", w: "45 min to sunset",  f: "Lifestyle · Campaigns" },
     { t: "Blue hour",   w: "20 — 35 min after", f: "Hero · Luxury" },
-    { t: "Night",       w: "After full dark", f: "Lighting · Entrances" }
-  ],
-  ratios: [
-    { r: "21:9", l: "Web hero" },
-    { r: "16:9", l: "Web / Ads" },
-    { r: "4:5",  l: "Feed" },
-    { r: "1:1",  l: "Square" },
-    { r: "9:16", l: "Reels" }
+    { t: "Night",       w: "After full dark",   f: "Lighting · Entrances" }
   ],
   deliver: [
     "RAW + JPG, full resolution",
     "Natural colour, no presets",
     "6000 px long edge minimum",
     "Straight verticals",
-    "Bracket entrances, blue hour and night",
+    "Bracket interiors, entrances and blue hour",
     "One folder per section"
-  ],
-  never: [
-    "Posing or looking at the lens",
-    "People dominating the frame",
-    "Empty land with no anchor",
-    "The same aerial height twice",
-    "Baked-in grading",
-    "Tight crops with no margin"
   ]
 };
 
