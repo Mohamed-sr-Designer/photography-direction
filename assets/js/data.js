@@ -97,7 +97,18 @@ const IMAGES = {
   /* 10 Night */
   'NT-R1': 'assets/img/night/nt-r1.jpg',
   'NT-R2': 'assets/img/night/nt-r2.jpg',
-  'NT-R3': 'assets/img/night/nt-r3.jpg'
+  'NT-R3': 'assets/img/night/nt-r3.jpg',
+
+  /* Top-ups for the must-have categories */
+  'AR-R4': 'assets/img/architecture/ar-r4.jpg',
+  'AR-R5': 'assets/img/architecture/ar-r5.jpg',
+  'AR-R6': 'assets/img/architecture/ar-r6.jpg',
+  'LD-R4': 'assets/img/land/ld-r4.jpg',
+  'LD-R5': 'assets/img/land/ld-r5.jpg',
+  'LD-R6': 'assets/img/land/ld-r6.jpg',
+  'LO-R4': 'assets/img/location/lo-r4.jpg',
+  'LO-R5': 'assets/img/location/lo-r5.jpg',
+  'LO-R6': 'assets/img/location/lo-r6.jpg'
 };
 
 const BRIEF = {
@@ -252,6 +263,36 @@ const BRIEF = {
     { t: "Bracketed exposures",        d: "Required for interiors, entrances, blue hour and night." }
   ],
 
+  /* ------------------------------- quick reference · one line each, no prose */
+  rules: {
+    frame: [
+      "Wide, medium and close of every scene",
+      "Landscape and portrait of every hero",
+      "Subject left, subject right, centred",
+      "With people and without people",
+      "Clean version and environmental version",
+      "Copy space on a plain area",
+      "Straight verticals, controlled wide angle"
+    ],
+    files: [
+      "RAW + JPG, full resolution",
+      "Natural colour profile, no presets",
+      "6000 px long edge minimum",
+      "Bracket interiors, entrances, blue hour, night",
+      "Natural HDR, no heavy sharpening",
+      "One folder per category"
+    ],
+    never: [
+      "Posing or looking at the lens",
+      "People dominating the frame",
+      "Empty land with no anchor in frame",
+      "The same aerial height twice",
+      "Baked-in grading or heavy presets",
+      "Bent verticals and stretched corners",
+      "Tight crops with no margin"
+    ]
+  },
+
   /* ------------------------------------------------ 09 · delivery specs */
   delivery: [
     { k: "Total images",     v: "360 per project" },
@@ -346,7 +387,10 @@ const BRIEF = {
       refs: [
         { ratio: "16:9", code: "AR-R1", label: "Hero exterior", note: "Negative space on the left for the headline" },
         { ratio: "9:16", code: "AR-R2", label: "Vertical hero", note: "Shot vertical on location, not cropped" },
-        { ratio: "4:5",  code: "AR-R3", label: "Detail", note: "Material and texture" }
+        { ratio: "4:5",  code: "AR-R3", label: "Detail", note: "Material and texture" },
+        { ratio: "3:2",  code: "AR-R4", label: "Entrance", note: "Approach and threshold together" },
+        { ratio: "16:9", code: "AR-R5", label: "Three quarter", note: "Two faces of the building" },
+        { ratio: "3:2",  code: "AR-R6", label: "Building + people", note: "Figures small, building the subject" }
       ],
       groups: [
         {
@@ -413,7 +457,10 @@ const BRIEF = {
       refs: [
         { ratio: "16:9", code: "LD-R1", label: "Plot in context", note: "Plot plus a built reference" },
         { ratio: "3:2",  code: "LD-R2", label: "Boundary", note: "Corner marker leading the eye" },
-        { ratio: "4:5",  code: "LD-R3", label: "Access", note: "Road arriving at the plot" }
+        { ratio: "4:5",  code: "LD-R3", label: "Access", note: "Road arriving at the plot" },
+        { ratio: "3:2",  code: "LD-R4", label: "Infrastructure", note: "Proof the land is serviced" },
+        { ratio: "4:5",  code: "LD-R5", label: "Plot marker", note: "Sharp foreground, land behind" },
+        { ratio: "16:9", code: "LD-R6", label: "Plot in the plan", note: "Aerial, plot readable in the whole" }
       ],
       groups: [
         {
@@ -477,7 +524,10 @@ const BRIEF = {
       refs: [
         { ratio: "21:9", code: "LO-R1", label: "Approach", note: "Main road leading to the site" },
         { ratio: "16:9", code: "LO-R2", label: "Landmark", note: "Landmark and site together" },
-        { ratio: "9:16", code: "LO-R3", label: "Entry", note: "Vertical entry sequence" }
+        { ratio: "9:16", code: "LO-R3", label: "Entry", note: "Vertical entry sequence" },
+        { ratio: "16:9", code: "LO-R4", label: "Internal road", note: "Road as a leading line" },
+        { ratio: "3:2",  code: "LO-R5", label: "Parking", note: "Tidy, building behind" },
+        { ratio: "16:9", code: "LO-R6", label: "Traffic", note: "Blue hour, light trails" }
       ],
       groups: [
         {
@@ -829,6 +879,29 @@ const BRIEF = {
     }
   ]
 };
+
+/* ==========================================================================
+   MASTERPLAN REFERENCE GALLERY
+   Real reference images supplied by the art director, grouped by the shot
+   type they demonstrate. These are the angles the masterplan set is built
+   from. Files live in assets/img/plan/<slug>/.
+   ========================================================================== */
+const PLAN = [
+  { slug: "drone-wide",    title: "Drone · Wide Establishing", n: 1,  note: "Maximum coverage. The opening frame." },
+  { slug: "drone-90",      title: "Drone · 90° Top View",      n: 10, note: "Straight down. Squared to the frame." },
+  { slug: "drone-45",      title: "Drone · 45° Aerial",        n: 3,  note: "The masterplan angle." },
+  { slug: "perspective",   title: "¾ Perspective",             n: 4,  note: "Two faces visible. Depth." },
+  { slug: "eye-level",     title: "Eye Level Wide",            n: 8,  note: "How a visitor actually sees it." },
+  { slug: "low-angle",     title: "Low Angle",                 n: 6,  note: "Height and presence." },
+  { slug: "leading-lines", title: "Leading Lines",             n: 2,  note: "Road or edge pulling the eye in." },
+  { slug: "context",       title: "Context Shot",              n: 3,  note: "The site inside its surroundings." }
+];
+PLAN.forEach(function (g) {
+  g.files = [];
+  for (var i = 1; i <= g.n; i++) {
+    g.files.push('assets/img/plan/' + g.slug + '/' + g.slug + '-' + (i < 10 ? '0' + i : i) + '.jpg');
+  }
+});
 
 /* Convenience lookups used by the renderer */
 BRIEF.byId = BRIEF.categories.reduce(function (map, c) { map[c.id] = c; return map; }, {});

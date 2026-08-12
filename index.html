@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Real Estate Photography Direction — Production Brief</title>
-<meta name="description" content="A complete photography direction for real estate development: shot lists, priorities, composition rules, usage and delivery. 36 images per category, 360 per project.">
+<title>Real Estate Photography Direction — Shot Brief</title>
+<meta name="description" content="Photography shot brief for real estate development. 36 images per category, 360 per project. Look at the frames, shoot the list.">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#0C1B2E">
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
@@ -17,628 +17,86 @@
 
 <div class="scrollbar" aria-hidden="true"><div class="scrollbar__fill" id="progress"></div></div>
 
-<a class="skip" href="#overview">Skip to brief</a>
-
-<!-- ══════════════════════════════════════════════════════ NAVBAR ═══ -->
+<!-- ═══════════════════════════════════════════════════════ NAV ═══ -->
 <header class="nav" id="nav">
   <div class="nav__in">
-    <a class="nav__brand" href="#top" aria-label="Home">
+    <a class="nav__brand" href="#top" aria-label="Top">
       <img src="assets/img/logo.svg" alt="" width="253" height="44">
-      <span class="nav__brandtag">Photography<br>Direction</span>
     </a>
-
-    <nav class="nav__links" id="navLinks" aria-label="Sections">
-      <a class="nav__link" href="#overview">Overview</a>
-      <a class="nav__link" href="#masterplan">Masterplan</a>
-      <a class="nav__link" href="#architecture">Architecture</a>
-      <a class="nav__link" href="#land">Land</a>
-      <a class="nav__link" href="#location">Location</a>
-      <a class="nav__link" href="#lifestyle">Lifestyle</a>
-      <a class="nav__link" href="#landscape">Landscape</a>
-      <a class="nav__link" href="#investment">Investment</a>
-      <a class="nav__link" href="#details">Details</a>
-      <a class="nav__link" href="#drone">Drone</a>
-      <a class="nav__link" href="#digital">Digital</a>
-      <a class="nav__link" href="#checklist">Checklist</a>
-    </nav>
-
+    <nav class="nav__links" id="navLinks" aria-label="Sections"></nav>
     <a class="nav__count" href="#checklist">
       <span class="nav__countnum" id="navCount">0/360</span>
-      <span class="nav__countlbl">frames</span>
     </a>
-
     <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
       <span></span><span></span>
     </button>
   </div>
 </header>
 
-<div class="drawer" id="drawer">
-  <ul class="drawer__list">
-    <li><a href="#overview"><em>00</em>Overview</a></li>
-    <li><a href="#volume"><em>—</em>Volume Requirement</a></li>
-    <li><a href="#language"><em>—</em>Visual Language</a></li>
-    <li><a href="#priorities"><em>—</em>Priorities</a></li>
-    <li><a href="#masterplan"><em>01</em>Masterplan</a></li>
-    <li><a href="#architecture"><em>02</em>Architecture</a></li>
-    <li><a href="#land"><em>03</em>Land &amp; Plots</a></li>
-    <li><a href="#location"><em>04</em>Location</a></li>
-    <li><a href="#lifestyle"><em>05</em>Lifestyle</a></li>
-    <li><a href="#landscape"><em>06</em>Landscape</a></li>
-    <li><a href="#investment"><em>07</em>Investment</a></li>
-    <li><a href="#details"><em>08</em>Details</a></li>
-    <li><a href="#drone"><em>09</em>Drone</a></li>
-    <li><a href="#digital"><em>—</em>Digital Usage</a></li>
-    <li><a href="#composition"><em>—</em>Composition</a></li>
-    <li><a href="#time"><em>—</em>Time of Day</a></li>
-    <li><a href="#night"><em>10</em>Night</a></li>
-    <li><a href="#technical"><em>—</em>Technical</a></li>
-    <li><a href="#checklist"><em>—</em>Final Checklist</a></li>
-  </ul>
-</div>
+<div class="drawer" id="drawer"><ul class="drawer__list" id="drawerList"></ul></div>
 
 <main id="top">
 
-<!-- ════════════════════════════════════════════════════════ HERO ═══ -->
+<!-- ══════════════════════════════════════════════════════ HERO ═══ -->
 <section class="hero">
-  <div class="hero__bg" aria-hidden="true">
-    <div class="hero__grid"></div>
-    <div class="hero__frame"></div>
-    <svg class="hero__marks" viewBox="0 0 1200 800" preserveAspectRatio="none">
-      <line x1="400" y1="0" x2="400" y2="800"/>
-      <line x1="800" y1="0" x2="800" y2="800"/>
-      <line x1="0" y1="266" x2="1200" y2="266"/>
-      <line x1="0" y1="533" x2="1200" y2="533"/>
-    </svg>
-  </div>
-
+  <div class="hero__bg" aria-hidden="true"><div class="hero__grid"></div></div>
   <div class="hero__in">
-    <div class="hero__meta">
-      <span class="tag tag--live">Production Brief</span>
-      <span class="hero__ver" id="heroVer"></span>
-    </div>
-
-    <h1 class="hero__h1">
-      <span>Real Estate</span>
-      <span>Photography</span>
-      <span class="is-accent">Direction</span>
-    </h1>
-
-    <p class="hero__lede">
-      A complete visual asset library designed for digital, social,
-      advertising and brand communication.
-    </p>
-
-    <dl class="hero__facts" id="heroFacts"></dl>
-
+    <span class="hero__kick">Production Brief · <span id="heroVer"></span></span>
+    <h1 class="hero__h1">Photography<br><span class="is-accent">Direction</span></h1>
+    <p class="hero__lede">Look at the frames. Shoot the list.</p>
     <div class="hero__stats">
-      <div class="hstat hstat--hero">
-        <span class="hstat__n">36</span>
-        <span class="hstat__l">images required<br>per category</span>
-      </div>
-      <div class="hstat">
-        <span class="hstat__n">10</span>
-        <span class="hstat__l">categories<br>per project</span>
-      </div>
-      <div class="hstat">
-        <span class="hstat__n">360</span>
-        <span class="hstat__l">final images<br>per project</span>
-      </div>
+      <div class="hstat hstat--hero"><b>36</b><span>images<br>per category</span></div>
+      <div class="hstat"><b>10</b><span>categories</span></div>
+      <div class="hstat"><b>360</b><span>images<br>per project</span></div>
     </div>
   </div>
-
-  <a class="hero__scroll" href="#overview" aria-label="Scroll to brief">
-    <span>Scroll</span><i></i>
-  </a>
 </section>
 
-<!-- ═══════════════════════════════════════════════════ OBJECTIVE ═══ -->
-<section class="sec sec--pad" id="overview" data-nav="overview">
-  <div class="shell">
-
-    <header class="sechead rv">
-      <span class="sechead__kick">01 — Objective</span>
-      <h2 class="sechead__h">Beyond Beautiful<br>Images.</h2>
-      <div class="sechead__side">
-        <p class="lede">
-          Create a premium visual library that communicates the development's
-          scale, location, architectural quality, investment value and
-          lifestyle potential.
-        </p>
-        <p>
-          This document is a production brief, not a mood board. Every frame on
-          it has a job to do in a real layout. Shoot the list, not the highlights.
-        </p>
-      </div>
-    </header>
-
-    <blockquote class="pull rv">
-      <p>
-        The goal is not only to capture beautiful images. The goal is to create
-        a complete visual asset library that gives the design team enough
-        flexibility to build an entire digital ecosystem from the shoot.
-      </p>
-    </blockquote>
-
-    <div class="ogrid" id="objectives"></div>
-
+<!-- ══════════════════════════════════════════════════ RULE BAR ═══ -->
+<section class="rulebar">
+  <div class="shell rulebar__in">
+    <p class="rulebar__eq"><b>36</b> per category <i>×</i> <b>10</b> categories <i>=</i> <b>360</b> images</p>
+    <p class="rulebar__note">Spread the 36 across the matrix. Never 36 versions of one frame.</p>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════ VOLUME ═══ -->
-<section class="sec sec--dark" id="volume" data-nav="overview">
+<!-- ═══════════════════════════════════ CATEGORIES (generated) ═══ -->
+<div id="cats"></div>
+
+<!-- ═════════════════════════════════════════ QUICK REFERENCE ════ -->
+<section class="sec sec--dark" id="rules">
   <div class="shell">
-
-    <header class="sechead sechead--center rv">
-      <span class="sechead__kick">02 — Volume Requirement</span>
-      <h2 class="sechead__h">The Number That<br>Defines This Shoot.</h2>
-    </header>
-
-    <div class="vol rv">
-      <div class="vol__big">
-        <span class="vol__n">36</span>
-        <span class="vol__x">images</span>
-      </div>
-      <div class="vol__txt">
-        <p class="vol__line">
-          <strong>36 images for every project, and 36 images for every type.</strong>
-        </p>
-        <p>
-          Each of the ten categories in this brief is a separate delivery of
-          36 final images. A category is not complete at 20 frames, and it is
-          not complete when the same subject has been shot 36 times from one
-          position. The 36 must spread across the composition matrix: wide,
-          medium and close, landscape and portrait, with people and without,
-          clean and environmental.
-        </p>
-        <p>
-          Ten categories at 36 images each is <strong>360 final images per
-          project</strong>. That is the delivery. Anything under it leaves the
-          design team short of material and forces the same four images to
-          carry the website, the campaign and the social calendar.
-        </p>
-      </div>
-    </div>
-
-    <div class="volgrid" id="volumeGrid"></div>
-
-    <div class="volsum rv">
-      <div class="volsum__row"><span>10 categories</span><b>×</b><span>36 images</span><b>=</b><em>360 images per project</em></div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═════════════════════════════════════════════ VISUAL LANGUAGE ═══ -->
-<section class="sec sec--pad" id="language" data-nav="overview">
-  <div class="shell">
-
-    <header class="sechead rv">
-      <span class="sechead__kick">03 — Visual Language</span>
-      <h2 class="sechead__h">How It Should<br>Feel.</h2>
-      <div class="sechead__side">
-        <p class="lede">
-          The photography should feel sophisticated, realistic, contemporary and
-          architectural rather than overly commercial or stock photography driven.
-        </p>
-        <p>
-          <strong>The images across this document are AI generated direction
-          references. They are not photographs of the project and not photographs
-          of any real place.</strong> They exist to agree the look, the framing and
-          the light before the shoot. Match the treatment, not the building.
-        </p>
-      </div>
-    </header>
-
-    <div class="langgrid" id="languageGrid"></div>
-
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════ PRIORITIES ═══ -->
-<section class="sec sec--pad sec--alt" id="priorities" data-nav="overview">
-  <div class="shell">
-
-    <header class="sechead rv">
-      <span class="sechead__kick">04 — Photography Priorities</span>
-      <h2 class="sechead__h">What Matters<br>Most.</h2>
-      <div class="sechead__side">
-        <p class="lede">
-          If the shoot runs short on time or light, this is the order in which
-          things get cut. Never cut from the top.
-        </p>
-      </div>
-    </header>
-
-    <div class="tiers" id="tiers"></div>
-
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════ MASTERPLAN ═══ -->
-<section class="sec cat" id="masterplan" data-nav="masterplan">
-  <div class="shell">
-    <header class="cathead" data-cathead="masterplan"></header>
-    <div class="refstrip" data-refs="masterplan"></div>
-
-    <div class="module rv">
-      <h3 class="module__h">Altitude Ladder</h3>
-      <p class="module__p">Three heights, three jobs. Cover all three before moving to the next zone.</p>
-      <ol class="ladder">
-        <li class="ladder__step">
-          <span class="ladder__n">High</span>
-          <b>Establishing</b>
-          <p>The whole development and everything around it. Answers “where is this”.</p>
-        </li>
-        <li class="ladder__step">
-          <span class="ladder__n">Mid</span>
-          <b>Planning</b>
-          <p>Zones, roads, green areas. Answers “how is this organised”.</p>
-        </li>
-        <li class="ladder__step">
-          <span class="ladder__n">Low</span>
-          <b>Cinematic</b>
-          <p>Close to the ground with a strong foreground. Answers “how does this feel”.</p>
-        </li>
-      </ol>
-    </div>
-
-    <div class="shotwrap" data-shots="masterplan"></div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════ ARCHITECTURE ═══ -->
-<section class="sec cat sec--alt" id="architecture" data-nav="architecture">
-  <div class="shell">
-    <header class="cathead" data-cathead="architecture"></header>
-    <div class="refstrip" data-refs="architecture"></div>
-
-    <div class="module rv">
-      <h3 class="module__h">Composition Priority</h3>
-      <p class="module__p">
-        Hero architectural images must provide enough negative space for headlines,
-        statistics, call to action buttons and graphic overlays. A perfectly centred
-        building with no empty area cannot be used as a hero image.
-      </p>
-      <div class="negspace">
-        <figure class="ns">
-          <div class="ns__box">
-            <span class="ns__copy">Copy space</span>
-            <span class="ns__sub">Subject</span>
-          </div>
-          <figcaption><b>Subject right</b> Headline sits on the left.</figcaption>
-        </figure>
-        <figure class="ns ns--left">
-          <div class="ns__box">
-            <span class="ns__sub">Subject</span>
-            <span class="ns__copy">Copy space</span>
-          </div>
-          <figcaption><b>Subject left</b> Headline sits on the right.</figcaption>
-        </figure>
-        <figure class="ns ns--top">
-          <div class="ns__box">
-            <span class="ns__copy">Copy space</span>
-            <span class="ns__sub">Subject</span>
-          </div>
-          <figcaption><b>Sky above</b> Headline sits over open sky.</figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <div class="shotwrap" data-shots="architecture"></div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════════ LAND ═══ -->
-<section class="sec cat" id="land" data-nav="land">
-  <div class="shell">
-    <header class="cathead" data-cathead="land"></header>
-    <div class="refstrip" data-refs="land"></div>
-
-    <div class="module rv">
-      <h3 class="module__h">Land Is Photographed In Context</h3>
-      <p class="module__p">
-        Empty ground photographed on its own reads as nothing. The same plot
-        photographed with a road, a boundary marker, a service line or a finished
-        building behind it reads as an opportunity. Every land frame needs at
-        least one anchor.
-      </p>
-      <div class="compare">
-        <figure class="cmp cmp--no">
-          <div class="cmp__box">
-            <span class="cmp__lbl">Empty ground, no anchor</span>
-          </div>
-          <figcaption><span class="cmp__tag cmp__tag--no">Avoid</span> Nothing in the frame gives scale, direction or value.</figcaption>
-        </figure>
-        <figure class="cmp cmp--yes">
-          <div class="cmp__box">
-            <span class="cmp__anchor cmp__anchor--road">Access road</span>
-            <span class="cmp__anchor cmp__anchor--mark">Boundary marker</span>
-            <span class="cmp__anchor cmp__anchor--built">Built reference</span>
-            <span class="cmp__lbl">Plot with three anchors</span>
-          </div>
-          <figcaption><span class="cmp__tag cmp__tag--yes">Correct</span> Road, marker and a built reference give the plot meaning.</figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <div class="shotwrap" data-shots="land"></div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════════ LOCATION ═══ -->
-<section class="sec cat sec--alt" id="location" data-nav="location">
-  <div class="shell">
-    <header class="cathead" data-cathead="location"></header>
-    <div class="refstrip" data-refs="location"></div>
-
-    <div class="module module--split rv">
-      <div>
-        <h3 class="module__h">Core Message</h3>
-        <p class="statement">
-          Show where the development is, how people reach it, and what surrounds it.
-        </p>
-        <p class="module__p">
-          Shoot the arrival the way a buyer experiences it. Start on the main road,
-          move to the turn off, then the entrance, then inside. That sequence becomes
-          the location section of the website on its own.
-        </p>
-      </div>
-      <ol class="seq">
-        <li><span>01</span>Main road</li>
-        <li><span>02</span>Turn off / access point</li>
-        <li><span>03</span>Approach</li>
-        <li><span>04</span>Entrance</li>
-        <li><span>05</span>Inside the development</li>
-      </ol>
-    </div>
-
-    <div class="shotwrap" data-shots="location"></div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════ LIFESTYLE ═══ -->
-<section class="sec cat" id="lifestyle" data-nav="lifestyle">
-  <div class="shell">
-    <header class="cathead" data-cathead="lifestyle"></header>
-    <div class="refstrip" data-refs="lifestyle"></div>
-
-    <div class="module rv">
-      <p class="statement statement--wide">
-        The project is the hero. People provide scale, context and aspiration.
-      </p>
-    </div>
-
-    <div class="shotwrap" data-shots="lifestyle"></div>
-
-    <div class="avoid rv" data-avoid="lifestyle"></div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════ LANDSCAPE ═══ -->
-<section class="sec cat sec--alt" id="landscape" data-nav="landscape">
-  <div class="shell">
-    <header class="cathead" data-cathead="landscape"></header>
-    <div class="refstrip" data-refs="landscape"></div>
-
-    <div class="module rv">
-      <h3 class="module__h">Shot Variety</h3>
-      <p class="module__p">Every outdoor space is captured at three distances from the same visit.</p>
-      <div class="triad">
-        <figure class="tri">
-          <div class="tri__box tri__box--wide"></div>
-          <figcaption><b>Wide</b><span>The whole space and its edges.</span></figcaption>
-        </figure>
-        <figure class="tri">
-          <div class="tri__box tri__box--med"></div>
-          <figcaption><b>Medium</b><span>One feature: a bench, a fountain, a path.</span></figcaption>
-        </figure>
-        <figure class="tri">
-          <div class="tri__box tri__box--det"></div>
-          <figcaption><b>Detail</b><span>Texture, planting, water, light.</span></figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <div class="shotwrap" data-shots="landscape"></div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════ INVESTMENT ═══ -->
-<section class="sec cat" id="investment" data-nav="investment">
-  <div class="shell">
-    <header class="cathead" data-cathead="investment"></header>
-    <div class="refstrip" data-refs="investment"></div>
-
-    <div class="module rv">
-      <h3 class="module__h">Visual Style</h3>
-      <div class="chips" data-style="investment"></div>
-      <p class="module__p">
-        These frames are about credibility. Real plans on the table, real light in
-        the room, real people looking at the work rather than at the lens.
-      </p>
-    </div>
-
-    <div class="shotwrap" data-shots="investment"></div>
-  </div>
-</section>
-
-<!-- ═════════════════════════════════════════════════════ DETAILS ═══ -->
-<section class="sec cat sec--alt" id="details" data-nav="details">
-  <div class="shell">
-    <header class="cathead" data-cathead="details"></header>
-    <div class="refstrip" data-refs="details"></div>
-
-    <div class="module rv">
-      <p class="statement statement--wide">
-        These images create flexibility for website sections, social content,
-        campaign layouts and supporting visual storytelling.
-      </p>
-    </div>
-
-    <div class="shotwrap" data-shots="details"></div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════ DRONE ═══ -->
-<section class="sec sec--dark cat cat--dark" id="drone" data-nav="drone">
-  <div class="shell">
-    <header class="cathead" data-cathead="drone"></header>
-    <div class="refstrip" data-refs="drone"></div>
-
-    <div class="dronegrid" id="droneGrid"></div>
-
-    <div class="note note--strong rv" data-note="drone"></div>
-
-    <div class="module rv">
-      <h3 class="module__h">Overlap With Masterplan Is Intentional</h3>
-      <p class="module__p">
-        Some subjects appear in both lists. The masterplan set is about the place.
-        The drone set is about altitude, angle and variety. Both are counted and
-        both are delivered. If two aerial frames look interchangeable, one of them
-        is wasted.
-      </p>
-    </div>
-
-    <div class="shotwrap" data-shots="drone"></div>
-  </div>
-</section>
-
-<!-- ═════════════════════════════════════════════ DIGITAL USAGE ════ -->
-<section class="sec sec--pad" id="digital" data-nav="digital">
-  <div class="shell">
-
-    <header class="sechead rv">
-      <span class="sechead__kick">Website · Social · Advertising</span>
-      <h2 class="sechead__h">Where These<br>Images Go.</h2>
-      <div class="sechead__side">
-        <p class="lede">
-          Every frame in this brief ends up in one of four places. The format
-          requirements below are not preferences. A frame that cannot be cut to
-          these ratios cannot be used.
-        </p>
-      </div>
-    </header>
-
-    <div class="usage" id="usageGrid"></div>
-
-    <div class="ratios rv">
-      <h3 class="module__h">Ratio Coverage Per Hero Subject</h3>
-      <p class="module__p">
-        Every hero subject is captured in all four ratios on location. Cropping a
-        16:9 frame down to 9:16 loses the composition and the subject.
-      </p>
-      <div class="ratios__row" id="ratioRow"></div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════ COMPOSITION ════ -->
-<section class="sec sec--pad sec--alt" id="composition" data-nav="digital">
-  <div class="shell">
-
-    <header class="sechead rv">
-      <span class="sechead__kick">Composition Requirements</span>
-      <h2 class="sechead__h">Variations,<br>Not Repeats.</h2>
-      <div class="sechead__side">
-        <p class="lede">
-          For every important scene, capture variations across the four axes below.
-          This is how one subject becomes six usable assets instead of one.
-        </p>
-      </div>
-    </header>
-
-    <div class="matrix" id="matrixGrid"></div>
-
-    <div class="banner rv">
-      <span class="banner__kick">The single most important rule</span>
-      <p class="banner__h">Shoot wider than the final crop.</p>
-      <p class="banner__p">
-        Images should allow the design team to crop and adapt them for multiple
-        digital formats. Leave margin on all four sides of every frame. A tight
-        composition that looks perfect in camera becomes unusable the moment it
-        has to fit a different format.
-      </p>
-    </div>
-
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════════════ TIME OF DAY ═══ -->
-<section class="sec sec--pad" id="time" data-nav="digital">
-  <div class="shell">
-
-    <header class="sechead rv">
-      <span class="sechead__kick">Time Of Day</span>
-      <h2 class="sechead__h">Light Plan<br>For The Day.</h2>
-      <div class="sechead__side">
-        <p class="lede">
-          The must have list is shot in daylight. Golden hour and blue hour are
-          short and cannot be recovered, so they are planned first and everything
-          else is built around them.
-        </p>
-      </div>
-    </header>
-
+    <h2 class="strip__h">Light</h2>
     <div class="timeline" id="timeline"></div>
 
-  </div>
-</section>
+    <h2 class="strip__h">Ratios · shoot each hero subject in all five</h2>
+    <div class="ratios__row" id="ratioRow"></div>
 
-<!-- ═══════════════════════════════════════════════════════ NIGHT ═══ -->
-<section class="sec cat sec--alt" id="night" data-nav="digital">
-  <div class="shell">
-    <header class="cathead" data-cathead="night"></header>
-    <div class="refstrip" data-refs="night"></div>
-    <div class="shotwrap" data-shots="night"></div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════ TECHNICAL ═══ -->
-<section class="sec sec--pad" id="technical" data-nav="checklist">
-  <div class="shell">
-
-    <header class="sechead rv">
-      <span class="sechead__kick">Technical Requirements</span>
-      <h2 class="sechead__h">How Files Are<br>Delivered.</h2>
-      <div class="sechead__side">
-        <p class="lede">
-          Deliver clean, neutral, high resolution files. Grading, cropping and
-          overlays are handled by the design team afterwards.
-        </p>
+    <div class="rules">
+      <div>
+        <h3 class="rules__h">Every frame</h3>
+        <ul class="rules__list" id="ruleFrame"></ul>
       </div>
-    </header>
-
-    <div class="techwrap">
-      <ul class="tech" id="techList"></ul>
-      <aside class="spec rv">
-        <h3 class="spec__h">Delivery Specification</h3>
-        <dl class="spec__list" id="specList"></dl>
-      </aside>
+      <div>
+        <h3 class="rules__h">Files</h3>
+        <ul class="rules__list" id="ruleFiles"></ul>
+      </div>
+      <div>
+        <h3 class="rules__h rules__h--no">Never</h3>
+        <ul class="rules__list rules__list--no" id="ruleNo"></ul>
+      </div>
     </div>
 
+    <p class="bigrule">Shoot wider than the final crop.</p>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════ CHECKLIST ═══ -->
-<section class="sec sec--pad sec--alt" id="checklist" data-nav="checklist">
+<!-- ═══════════════════════════════════════════════ CHECKLIST ════ -->
+<section class="sec sec--pad" id="checklist">
   <div class="shell">
-
-    <header class="sechead rv">
-      <span class="sechead__kick">Final Shot Checklist</span>
-      <h2 class="sechead__h">The Delivery,<br>Tracked.</h2>
-      <div class="sechead__side">
-        <p class="lede">
-          Tick each shot as it is captured. Progress is saved in this browser, so
-          the list can be used on location and picked up again later.
-        </p>
-      </div>
-    </header>
-
     <div class="prog" id="prog">
       <div class="prog__top">
-        <p class="prog__count"><span id="progNum">0 / 360</span> <em>frames completed</em></p>
+        <p class="prog__count"><span id="progNum">0 / 360</span> <em>frames</em></p>
         <div class="prog__acts">
           <button type="button" class="btn btn--ghost" id="expandAll">Expand all</button>
           <button type="button" class="btn btn--ghost" id="resetAll">Reset</button>
@@ -646,40 +104,24 @@
       </div>
       <div class="prog__bar"><div class="prog__fill" id="progFill"></div></div>
       <div class="prog__meta">
-        <span><b id="progShots">0</b> of <span id="progShotsTotal">110</span> shots ticked</span>
-        <span><b id="progCats">0</b> of <span id="progCatsTotal">10</span> categories complete</span>
+        <span><b id="progShots">0</b>/<span id="progShotsTotal">110</span> shots</span>
+        <span><b id="progCats">0</b>/<span id="progCatsTotal">10</span> categories</span>
         <span id="progPct">0%</span>
       </div>
     </div>
-
     <div class="checklist" id="checklistWrap"></div>
-
   </div>
 </section>
 
 </main>
 
-<!-- ══════════════════════════════════════════════════════ FOOTER ═══ -->
+<!-- ══════════════════════════════════════════════════ FOOTER ════ -->
 <footer class="foot">
   <div class="shell foot__in">
-    <div class="foot__brand">
-      <img src="assets/img/logo.svg" alt="" width="253" height="44">
-      <p class="foot__title">Real Estate<br>Photography Direction</p>
-      <p class="foot__sub">Prepared for Creative Production</p>
-    </div>
-
-    <div class="foot__cols">
-      <dl class="foot__meta" id="footMeta"></dl>
-      <p class="foot__note">
-        Create a complete visual asset library, not just a collection of
-        beautiful images.
-      </p>
-    </div>
-  </div>
-  <div class="foot__bar">
-    <span>Photography Brief — 2026</span>
-    <span id="footVer"></span>
-    <span>36 images per category · 360 per project</span>
+    <img src="assets/img/logo.svg" alt="" width="253" height="44">
+    <p class="foot__title">Real Estate<br>Photography Direction</p>
+    <p class="foot__note">A complete visual asset library. Not a collection of nice images.</p>
+    <p class="foot__meta" id="footMeta"></p>
   </div>
 </footer>
 

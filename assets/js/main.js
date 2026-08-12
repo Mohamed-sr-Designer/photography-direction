@@ -1,7 +1,7 @@
 /* ==========================================================================
    REAL ESTATE PHOTOGRAPHY DIRECTION — UI
-   Renders every repeated component from BRIEF (assets/js/data.js).
-   Nothing in the shot lists is written in markup by hand.
+   Image led. Every category is a strip of frames, not a page of prose.
+   All content comes from assets/js/data.js.
    ========================================================================== */
 (function () {
   'use strict';
@@ -12,332 +12,160 @@
     return String(v == null ? '' : v)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   };
-  var ar = function (ratio) { return String(ratio).replace(':', ' / '); };
-  var set = function (target, html) { var n = $(target); if (n) n.innerHTML = html; };
+  var ar  = function (r) { return String(r).replace(':', ' / '); };
+  var set = function (sel, html) { var n = $(sel); if (n) n.innerHTML = html; };
 
-  /* ================================================== reusable partials == */
-
-  /**
-   * ImageReference — renders a real photo once one is registered in IMAGES
-   * (keyed by slot code), otherwise a wireframe placeholder in the same
-   * aspect ratio. Nothing else has to change when the images arrive.
-   */
-  function Frame(ref, extra) {
-    var src = (typeof IMAGES !== 'undefined') ? IMAGES[ref.code] : null;
-
-    var box = src
-      ? '<div class="frame__box frame__box--img" style="--ar:' + ar(ref.ratio) + '">' +
-          '<img src="' + esc(src) + '" alt="Direction reference: ' + esc(ref.label) + '" loading="lazy">' +
-          '<span class="frame__code frame__code--on">' + esc(ref.code) + '</span>' +
-          '<span class="frame__ratio frame__ratio--on">' + esc(ref.ratio) + '</span>' +
-          '<span class="frame__ai" title="AI generated direction reference, not a photograph of the project">AI reference</span>' +
-        '</div>'
-      : '<div class="frame__box" style="--ar:' + ar(ref.ratio) + '">' +
-          '<span class="frame__code">' + esc(ref.code) + '</span>' +
-          '<span class="frame__tag">' + esc(ref.label) + '</span>' +
-          '<span class="frame__ratio">' + esc(ref.ratio) + '</span>' +
-        '</div>';
-
-    return '' +
-      '<figure class="frame rv' + (extra ? ' ' + extra : '') + '">' +
-        box +
-        (ref.note ? '<figcaption class="frame__cap">' + esc(ref.note) + '</figcaption>' : '') +
-      '</figure>';
-  }
-
-  /** ShotCard */
-  function ShotCard(shot) {
-    return '' +
-      '<article class="shot">' +
-        '<div class="shot__top">' +
-          '<span class="shot__code">' + esc(shot.code) + '</span>' +
-          '<span class="shot__qty"><b>' + shot.qty + '</b> frames</span>' +
-        '</div>' +
-        '<h4 class="shot__t">' + esc(shot.title) + '</h4>' +
-        '<span class="shot__type">' + esc(shot.type) + '</span>' +
-        '<p class="shot__row"><b>Composition</b>' + esc(shot.composition) + '</p>' +
-        (shot.notes ? '<p class="shot__note">' + esc(shot.notes) + '</p>' : '') +
-        '<div class="shot__use">' +
-          shot.usage.map(function (u) { return '<span class="use">' + esc(u) + '</span>'; }).join('') +
-        '</div>' +
-      '</article>';
-  }
-
-  /** SectionHeader for a category */
-  function CatHead(cat) {
-    var total = quotaOf(cat);
-    return '' +
-      '<div class="cathead__l rv">' +
-        '<div class="cathead__eyebrow">' +
-          '<span class="cathead__num">' + esc(cat.num) + ' / ' + esc(cat.nav.toUpperCase()) + '</span>' +
-          '<span class="cathead__tier" data-tier="' + esc(cat.tier) + '">' + esc(cat.tier) + '</span>' +
-        '</div>' +
-        '<h2 class="cathead__h">' + esc(cat.title) + '</h2>' +
-        '<p class="cathead__lede">' + esc(cat.lede) + '</p>' +
-      '</div>' +
-      '<div class="cathead__r rv">' +
-        '<p class="cathead__purpose">' + esc(cat.purpose) + '</p>' +
-        '<div class="cathead__quota">' +
-          '<span class="cathead__quotan">' + total + '</span>' +
-          '<span class="cathead__quotal">images required<br>for this category</span>' +
-        '</div>' +
-      '</div>';
-  }
-
-  function quotaOf(cat) {
-    return cat.groups.reduce(function (n, g) {
+  var quotaOf = function (c) {
+    return c.groups.reduce(function (n, g) {
       return n + g.shots.reduce(function (m, s) { return m + s.qty; }, 0);
     }, 0);
-  }
-  function shotsOf(cat) {
-    return cat.groups.reduce(function (all, g) { return all.concat(g.shots); }, []);
-  }
+  };
+  var shotsOf = function (c) {
+    return c.groups.reduce(function (a, g) { return a.concat(g.shots); }, []);
+  };
 
-  /* ============================================================ meta ==== */
+  /* ------------------------------------------------------------ tiles --- */
 
-  function renderMeta() {
-    var m = BRIEF.meta;
-    var ver = m.version + ' · ' + m.date;
-    var v1 = $('#heroVer'); if (v1) v1.textContent = ver;
-    var v2 = $('#footVer'); if (v2) v2.textContent = 'Photography Brief ' + ver;
+  /** One reference frame: the image is the message, the label is a whisper. */
+  function Tile(ref) {
+    var src = (typeof IMAGES !== 'undefined') ? IMAGES[ref.code] : null;
+    var inner = src
+      ? '<img src="' + esc(src) + '" alt="' + esc(ref.label) + '" loading="lazy">' +
+        '<span class="tile__ai">AI</span>'
+      : '<span class="tile__wire">' + esc(ref.ratio) + '</span>';
 
-    set('#heroFacts',
-      [['Project', m.project], ['Client', m.client], ['Document', m.document],
-       ['Version', ver]]
-      .map(function (r) { return '<div><dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd></div>'; }).join(''));
+    // flex-grow is set to the aspect ratio so a row of mixed formats
+    // justifies to one common height, like a contact sheet.
+    var p = String(ref.ratio).split(':');
+    var w = (Number(p[0]) / Number(p[1])).toFixed(3);
 
-    set('#footMeta',
-      [['Project', m.project], ['Document', m.document], ['Type', m.type],
-       ['Prepared by', m.owner], ['Version', m.version], ['Date', m.date]]
-      .map(function (r) { return '<div><dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd></div>'; }).join(''));
-  }
-
-  /* ====================================================== objectives ==== */
-
-  function renderObjectives() {
-    set('#objectives', BRIEF.objectives.map(function (o, i) {
-      return '<article class="ocard rv" style="--d:' + (i * 55) + 'ms">' +
-        '<span class="ocard__n">' + esc(o.n) + '</span>' +
-        '<h3 class="ocard__t">' + esc(o.title) + '</h3>' +
-        '<p class="ocard__b">' + esc(o.body) + '</p>' +
-      '</article>';
-    }).join(''));
+    return '<figure class="tile rv" style="--ar:' + ar(ref.ratio) + ';--w:' + w + '">' +
+      '<div class="tile__box">' + inner +
+        '<span class="tile__ratio">' + esc(ref.ratio) + '</span>' +
+      '</div>' +
+      '<figcaption class="tile__cap">' +
+        '<b>' + esc(ref.label) + '</b>' +
+        (ref.note ? '<span>' + esc(ref.note) + '</span>' : '') +
+      '</figcaption>' +
+    '</figure>';
   }
 
-  /* ========================================================== volume ==== */
-
-  function renderVolume() {
-    set('#volumeGrid', BRIEF.categories.map(function (c, i) {
-      return '<article class="volcard rv" style="--d:' + (i * 40) + 'ms">' +
-        '<span class="volcard__n">' + esc(c.num) + '</span>' +
-        '<h3 class="volcard__t">' + esc(c.nav) + '</h3>' +
-        '<span class="volcard__q">' + quotaOf(c) + '<em>images</em></span>' +
-      '</article>';
-    }).join(''));
+  /** A real supplied reference photo in the masterplan gallery. */
+  function PlanTile(src, label) {
+    return '<figure class="ptile rv">' +
+      '<img src="' + esc(src) + '" alt="' + esc(label) + '" loading="lazy">' +
+    '</figure>';
   }
 
-  /* ================================================ visual language ==== */
-
-  function renderLanguage() {
-    set('#languageGrid', BRIEF.language.map(function (l, i) {
-      return '<article class="langcard rv" style="--d:' + (i * 55) + 'ms">' +
-        '<div class="langcard__head">' +
-          '<span class="langcard__n">' + esc(l.n) + '</span>' +
-          '<h3 class="langcard__t">' + esc(l.title) + '</h3>' +
-        '</div>' +
-        Frame({ ratio: l.ratio, code: 'REF-' + l.n, label: l.title }) +
-        '<p class="langcard__b">' + esc(l.body) + '</p>' +
-      '</article>';
-    }).join(''));
-  }
-
-  /* ====================================================== priorities ==== */
-
-  function renderPriorities() {
-    set('#tiers', BRIEF.priorities.map(function (p) {
-      var cards = p.items.map(function (id) {
-        var c = BRIEF.byId[id];
-        var suggested = shotsOf(c).slice(0, 3).map(function (s) { return s.title; }).join(' · ');
-        var usage = {};
-        shotsOf(c).forEach(function (s) { s.usage.forEach(function (u) { usage[u] = 1; }); });
-        return '<article class="pcard">' +
-          '<div class="pcard__top">' +
-            '<span class="pcard__n">' + esc(c.num) + '</span>' +
-            '<h4 class="pcard__t">' + esc(c.nav) + '</h4>' +
-          '</div>' +
-          '<p class="pcard__b">' + esc(c.purpose) + '</p>' +
-          '<p class="pcard__b"><b>Suggested:</b> ' + esc(suggested) + '</p>' +
-          '<div class="pcard__meta">' +
-            '<span class="pcard__q">' + quotaOf(c) + ' images</span>' +
-            '<span>' + esc(Object.keys(usage).join(' · ')) + '</span>' +
-          '</div>' +
-        '</article>';
-      }).join('');
-
-      return '<section class="tier tier--' + esc(p.rank) + ' rv">' +
-        '<header class="tier__head">' +
-          '<span class="tier__rank">Priority ' + esc(p.rank) + '</span>' +
-          '<h3 class="tier__t">' + esc(p.tier) + '</h3>' +
-          '<span class="tier__note">' + esc(p.note) + '</span>' +
-        '</header>' +
-        '<div class="tier__body">' + cards + '</div>' +
-      '</section>';
-    }).join(''));
-  }
-
-  /* ====================================================== categories ==== */
+  /* ------------------------------------------------------- categories --- */
 
   function renderCategories() {
-    BRIEF.categories.forEach(function (cat) {
-      var head = $('[data-cathead="' + cat.id + '"]');
-      if (head) head.innerHTML = CatHead(cat);
+    var html = BRIEF.categories.map(function (c) {
+      var dark = (c.id === 'drone' || c.id === 'night');
 
-      var refs = $('[data-refs="' + cat.id + '"]');
-      if (refs && cat.refs) {
-        refs.innerHTML = cat.refs.map(function (r, i) {
-          return Frame(r).replace('class="frame rv"', 'class="frame rv" style="--d:' + (i * 70) + 'ms"');
-        }).join('');
-      }
-
-      var wrap = $('[data-shots="' + cat.id + '"]');
-      if (wrap) {
-        wrap.innerHTML = cat.groups.map(function (g) {
-          return '<section class="shotgroup rv">' +
-            '<h3 class="shotgroup__label">' + esc(g.label) +
-              ' <span>' + g.shots.reduce(function (n, s) { return n + s.qty; }, 0) + ' frames</span></h3>' +
-            '<div class="shots">' + g.shots.map(ShotCard).join('') + '</div>' +
+      var plan = '';
+      if (c.id === 'masterplan' && typeof PLAN !== 'undefined') {
+        plan = '<div class="plan">' + PLAN.map(function (g) {
+          return '<section class="plan__g rv">' +
+            '<h3 class="plan__h">' + esc(g.title) +
+              '<em>' + g.files.length + '</em>' +
+              '<span>' + esc(g.note) + '</span>' +
+            '</h3>' +
+            '<div class="plan__row">' +
+              g.files.map(function (f) { return PlanTile(f, g.title); }).join('') +
+            '</div>' +
           '</section>';
-        }).join('');
+        }).join('') + '</div>';
       }
 
-      var avoid = $('[data-avoid="' + cat.id + '"]');
-      if (avoid && cat.avoid) {
-        avoid.innerHTML = '<h3 class="avoid__h">Avoid</h3><ul class="avoid__list">' +
-          cat.avoid.map(function (a) { return '<li>' + esc(a) + '</li>'; }).join('') + '</ul>';
-      }
-
-      var style = $('[data-style="' + cat.id + '"]');
-      if (style && cat.style) {
-        style.innerHTML = cat.style.map(function (s) { return '<span class="chip">' + esc(s) + '</span>'; }).join('');
-      }
-
-      var note = $('[data-note="' + cat.id + '"]');
-      if (note && cat.note) {
-        note.innerHTML = '<h3 class="note__h">' + esc(cat.note.title) + '</h3>' +
-                         '<p class="note__b">' + esc(cat.note.body) + '</p>';
-      }
-    });
-  }
-
-  /* =========================================================== drone ==== */
-
-  function renderDrone() {
-    var shots = shotsOf(BRIEF.byId.drone);
-    set('#droneGrid', shots.map(function (s, i) {
-      return '<article class="dcell rv" style="--d:' + (i * 30) + 'ms">' +
-        '<span class="dcell__n">' + String(i + 1).padStart(2, '0') + '</span>' +
-        '<h3 class="dcell__t">' + esc(s.title) + '</h3>' +
-        '<span class="dcell__m">' + esc(s.type) + ' · ' + s.qty + ' frames</span>' +
-      '</article>';
-    }).join(''));
-  }
-
-  /* =========================================================== usage ==== */
-
-  function renderUsage() {
-    set('#usageGrid', BRIEF.usage.map(function (u, i) {
-      return '<article class="ucard rv" style="--d:' + (i * 60) + 'ms">' +
-        '<span class="ucard__n">' + esc(u.n) + '</span>' +
-        '<h3 class="ucard__t">' + esc(u.title) + '</h3>' +
-        '<div class="ucard__ratios">' +
-          u.ratios.map(function (r) { return '<span class="rchip">' + esc(r) + '</span>'; }).join('') +
+      return '<section class="cat' + (dark ? ' cat--dark' : '') + '" id="' + esc(c.id) + '" data-nav="' + esc(c.id) + '">' +
+        '<div class="shell">' +
+          '<header class="chead rv">' +
+            '<span class="chead__num">' + esc(c.num) + '</span>' +
+            '<h2 class="chead__t">' + esc(c.nav) + '</h2>' +
+            '<span class="chead__tier" data-tier="' + esc(c.tier) + '">' + esc(c.tier) + '</span>' +
+            '<span class="chead__q">' + quotaOf(c) + '</span>' +
+            '<p class="chead__l">' + esc(c.lede) + '</p>' +
+          '</header>' +
+          '<div class="tiles">' + c.refs.map(Tile).join('') + '</div>' +
+          plan +
         '</div>' +
-        '<ul class="ucard__list">' +
-          u.req.map(function (r) { return '<li>' + esc(r) + '</li>'; }).join('') +
+      '</section>';
+    }).join('');
+
+    set('#cats', html);
+  }
+
+  /* ------------------------------------------------------------- nav ---- */
+
+  function renderNav() {
+    var links = BRIEF.categories.map(function (c) {
+      return '<a class="nav__link" href="#' + esc(c.id) + '">' + esc(c.nav) + '</a>';
+    }).join('') + '<a class="nav__link" href="#checklist">List</a>';
+    set('#navLinks', links);
+
+    set('#drawerList', BRIEF.categories.map(function (c) {
+      return '<li><a href="#' + esc(c.id) + '"><em>' + esc(c.num) + '</em>' + esc(c.nav) +
+             '<b>' + quotaOf(c) + '</b></a></li>';
+    }).join('') + '<li><a href="#rules"><em>—</em>Rules</a></li>' +
+                  '<li><a href="#checklist"><em>—</em>Checklist</a></li>');
+  }
+
+  /* ----------------------------------------------------------- strips --- */
+
+  function renderStrips() {
+    var m = BRIEF.meta;
+    var v = $('#heroVer'); if (v) v.textContent = m.version + ' · ' + m.date;
+    var f = $('#footMeta');
+    if (f) f.textContent = m.project + ' · ' + m.document + ' · ' + m.version + ' · ' + m.date;
+
+    set('#timeline', BRIEF.timeOfDay.map(function (t, i) {
+      return '<article class="tcard tcard--' + esc(t.n) + ' rv" style="--d:' + (i * 50) + 'ms">' +
+        '<h3 class="tcard__t">' + esc(t.title) + '</h3>' +
+        '<span class="tcard__w">' + esc(t.window) + '</span>' +
+        '<ul class="tcard__best">' +
+          t.best.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('') +
         '</ul>' +
       '</article>';
     }).join(''));
 
     var ratios = [
-      { r: '21:9', l: 'Website ultra wide' },
-      { r: '16:9', l: 'Website / Ads' },
-      { r: '4:5',  l: 'Social feed' },
-      { r: '1:1',  l: 'Square safe' },
-      { r: '9:16', l: 'Stories / Reels' }
+      { r: '21:9', l: 'Web hero' }, { r: '16:9', l: 'Web / Ads' },
+      { r: '4:5',  l: 'Feed' },     { r: '1:1',  l: 'Square' },
+      { r: '9:16', l: 'Reels' }
     ];
     set('#ratioRow', ratios.map(function (x, i) {
-      return '<figure class="rframe rv" style="--d:' + (i * 60) + 'ms">' +
+      return '<figure class="rframe rv" style="--d:' + (i * 50) + 'ms">' +
         '<div class="rframe__box" style="--ar:' + ar(x.r) + '">' + esc(x.r) + '</div>' +
-        '<figcaption class="rframe__lbl">' + esc(x.l) + '</figcaption>' +
+        '<figcaption>' + esc(x.l) + '</figcaption>' +
       '</figure>';
     }).join(''));
+
+    var li = function (t) { return '<li>' + esc(t) + '</li>'; };
+    set('#ruleFrame', BRIEF.rules.frame.map(li).join(''));
+    set('#ruleFiles', BRIEF.rules.files.map(li).join(''));
+    set('#ruleNo',    BRIEF.rules.never.map(li).join(''));
   }
 
-  /* ========================================================== matrix ==== */
-
-  function renderMatrix() {
-    set('#matrixGrid', BRIEF.matrix.map(function (m, i) {
-      return '<div class="mcol rv" style="--d:' + (i * 60) + 'ms">' +
-        '<h3 class="mcol__h">' + esc(m.g) + '</h3>' +
-        '<ul class="mcol__list">' +
-          m.items.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') +
-        '</ul>' +
-      '</div>';
-    }).join(''));
-  }
-
-  /* ======================================================== timeline ==== */
-
-  function renderTimeline() {
-    set('#timeline', BRIEF.timeOfDay.map(function (t, i) {
-      return '<article class="tcard tcard--' + esc(t.n) + ' rv" style="--d:' + (i * 70) + 'ms">' +
-        '<span class="tcard__n">' + esc(t.n) + '</span>' +
-        '<h3 class="tcard__t">' + esc(t.title) + '</h3>' +
-        '<span class="tcard__w">' + esc(t.window) + '</span>' +
-        '<p class="tcard__b">' + esc(t.body) + '</p>' +
-        '<div class="tcard__best"><b>Best for</b><ul>' +
-          t.best.map(function (b) { return '<li>' + esc(b) + '</li>'; }).join('') +
-        '</ul></div>' +
-      '</article>';
-    }).join(''));
-  }
-
-  /* ======================================================= technical ==== */
-
-  function renderTechnical() {
-    set('#techList', BRIEF.technical.map(function (t, i) {
-      return '<li class="rv" style="--d:' + (i * 30) + 'ms"><div><b>' + esc(t.t) + '</b><span>' + esc(t.d) + '</span></div></li>';
-    }).join(''));
-
-    set('#specList', BRIEF.delivery.map(function (d) {
-      return '<div><dt>' + esc(d.k) + '</dt><dd>' + esc(d.v) + '</dd></div>';
-    }).join(''));
-  }
-
-  /* ======================================================= checklist ==== */
+  /* -------------------------------------------------------- checklist --- */
 
   var STORE = 'repd.checklist.v1';
   var state = {};
 
   function load() {
-    try { state = JSON.parse(localStorage.getItem(STORE) || '{}') || {}; }
-    catch (e) { state = {}; }
+    try { state = JSON.parse(localStorage.getItem(STORE) || '{}') || {}; } catch (e) { state = {}; }
   }
   function save() {
     try { localStorage.setItem(STORE, JSON.stringify(state)); } catch (e) { /* private mode */ }
   }
 
   function renderChecklist() {
-    var html = BRIEF.categories.map(function (cat) {
-      var shots = shotsOf(cat);
-      var items = shots.map(function (s) {
+    set('#checklistWrap', BRIEF.categories.map(function (cat) {
+      var items = shotsOf(cat).map(function (s) {
         return '<label class="clitem">' +
-          '<input type="checkbox" data-code="' + esc(s.code) + '" data-qty="' + s.qty + '" data-cat="' + esc(cat.id) + '">' +
+          '<input type="checkbox" data-code="' + esc(s.code) + '" data-qty="' + s.qty + '">' +
           '<span class="clbox" aria-hidden="true"></span>' +
-          '<span class="clitem__txt">' +
-            '<span class="clitem__t">' + esc(s.title) + '</span>' +
-            '<span class="clitem__m">' + esc(s.code) + ' · ' + esc(s.type) + '</span>' +
-          '</span>' +
+          '<span class="clitem__t">' + esc(s.title) + '</span>' +
           '<span class="clitem__q">' + s.qty + '</span>' +
         '</label>';
       }).join('');
@@ -347,16 +175,13 @@
           '<span class="clcat__num">' + esc(cat.num) + '</span>' +
           '<span class="clcat__t">' + esc(cat.nav) + '</span>' +
           '<span class="clcat__bar"><span class="clcat__barfill"></span></span>' +
-          '<span class="clcat__n"><b>0</b> / ' + quotaOf(cat) + '</span>' +
+          '<span class="clcat__n"><b>0</b>/' + quotaOf(cat) + '</span>' +
           '<span class="clcat__chev" aria-hidden="true"></span>' +
         '</button>' +
         '<div class="clcat__body">' + items + '</div>' +
       '</section>';
-    }).join('');
+    }).join(''));
 
-    set('#checklistWrap', html);
-
-    // restore ticks
     $$('#checklistWrap input[type=checkbox]').forEach(function (cb) {
       cb.checked = !!state[cb.dataset.code];
       cb.addEventListener('change', function () {
@@ -365,11 +190,9 @@
       });
     });
 
-    // accordion
     $$('#checklistWrap .clcat__head').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        var card = btn.closest('.clcat');
-        var open = card.classList.toggle('is-open');
+        var open = btn.closest('.clcat').classList.toggle('is-open');
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
       });
     });
@@ -390,7 +213,7 @@
     var reset = $('#resetAll');
     if (reset) {
       reset.addEventListener('click', function () {
-        if (!window.confirm('Clear every ticked shot? This cannot be undone.')) return;
+        if (!window.confirm('Clear every ticked shot?')) return;
         state = {}; save();
         $$('#checklistWrap input[type=checkbox]').forEach(function (cb) { cb.checked = false; });
         updateProgress();
@@ -402,54 +225,46 @@
 
   function updateProgress() {
     var frames = 0, shots = 0, catsDone = 0;
-    var totalFrames = BRIEF.quota.total;
-    var totalShots = BRIEF.allShots.length;
+    var total = BRIEF.quota.total;
 
     BRIEF.categories.forEach(function (cat) {
-      var list = shotsOf(cat), cFrames = 0, cShots = 0;
-      list.forEach(function (s) {
-        if (state[s.code]) { cFrames += s.qty; cShots++; }
-      });
-      frames += cFrames; shots += cShots;
-      if (cShots === list.length && list.length) catsDone++;
+      var list = shotsOf(cat), cf = 0, cs = 0;
+      list.forEach(function (s) { if (state[s.code]) { cf += s.qty; cs++; } });
+      frames += cf; shots += cs;
+      if (list.length && cs === list.length) catsDone++;
 
       var card = $('.clcat[data-cat="' + cat.id + '"]');
       if (card) {
         var q = quotaOf(cat);
-        var fill = $('.clcat__barfill', card);
-        var num = $('.clcat__n b', card);
-        if (fill) fill.style.width = (q ? (cFrames / q) * 100 : 0) + '%';
-        if (num) num.textContent = cFrames;
-        card.classList.toggle('is-done', cShots === list.length && list.length > 0);
+        var fill = $('.clcat__barfill', card), num = $('.clcat__n b', card);
+        if (fill) fill.style.width = (q ? (cf / q) * 100 : 0) + '%';
+        if (num) num.textContent = cf;
+        card.classList.toggle('is-done', list.length > 0 && cs === list.length);
       }
     });
 
-    var pct = totalFrames ? Math.round((frames / totalFrames) * 100) : 0;
-    var n = $('#progNum');   if (n) n.textContent = frames + ' / ' + totalFrames;
+    var pct = total ? Math.round((frames / total) * 100) : 0;
+    var n = $('#progNum');   if (n) n.textContent = frames + ' / ' + total;
     var f = $('#progFill');  if (f) f.style.width = pct + '%';
     var s = $('#progShots'); if (s) s.textContent = shots;
     var c = $('#progCats');  if (c) c.textContent = catsDone;
     var p = $('#progPct');   if (p) p.textContent = pct + '%';
-    var nav = $('#navCount');if (nav) nav.textContent = frames + '/' + totalFrames;
-
-    var st = $('#progShotsTotal'); if (st) st.textContent = totalShots;
+    var v = $('#navCount');  if (v) v.textContent = frames + '/' + total;
+    var st = $('#progShotsTotal'); if (st) st.textContent = BRIEF.allShots.length;
     var ct = $('#progCatsTotal');  if (ct) ct.textContent = BRIEF.categories.length;
   }
 
-  /* ============================================================= nav ==== */
+  /* -------------------------------------------------------- behaviour --- */
 
   function initNav() {
     var nav = $('#nav'), toggle = $('#navToggle'), drawer = $('#drawer');
-    var links = $$('.nav__link');
-    var sections = $$('[data-nav]');
-    var fill = $('#progress');
+    var links = $$('.nav__link'), sections = $$('[data-nav]'), fill = $('#progress');
 
     if (toggle && drawer) {
       toggle.addEventListener('click', function () {
         var on = drawer.classList.toggle('is-on');
         toggle.classList.toggle('is-on', on);
         toggle.setAttribute('aria-expanded', on ? 'true' : 'false');
-        toggle.setAttribute('aria-label', on ? 'Close menu' : 'Open menu');
       });
       $$('a', drawer).forEach(function (a) {
         a.addEventListener('click', function () {
@@ -466,23 +281,14 @@
       ticking = true;
       requestAnimationFrame(function () {
         var y = window.scrollY || document.documentElement.scrollTop;
-
         if (nav) nav.classList.toggle('is-stuck', y > 8);
-
         if (fill) {
           var h = document.documentElement.scrollHeight - window.innerHeight;
           fill.style.width = (h > 0 ? Math.min(1, y / h) * 100 : 0) + '%';
         }
-
-        var current = '';
-        var line = y + window.innerHeight * 0.32;
-        sections.forEach(function (sec) {
-          if (sec.offsetTop <= line) current = sec.dataset.nav;
-        });
-        links.forEach(function (a) {
-          a.classList.toggle('is-on', a.getAttribute('href') === '#' + current);
-        });
-
+        var cur = '', line = y + window.innerHeight * 0.3;
+        sections.forEach(function (sec) { if (sec.offsetTop <= line) cur = sec.dataset.nav; });
+        links.forEach(function (a) { a.classList.toggle('is-on', a.getAttribute('href') === '#' + cur); });
         ticking = false;
       });
     }
@@ -490,8 +296,6 @@
     window.addEventListener('resize', onScroll);
     onScroll();
   }
-
-  /* ========================================================== reveal ==== */
 
   function initReveal() {
     var nodes = $$('.rv');
@@ -503,38 +307,24 @@
       entries.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.04 });
     nodes.forEach(function (n) { io.observe(n); });
 
-    // Safety net: if the observer never ran (background tab, print, unusual
-    // browser) nothing would ever become visible. Reveal everything instead.
+    // If the observer never runs (background tab, print) nothing would show.
     setTimeout(function () {
-      if (!document.querySelector('.rv.in')) {
-        nodes.forEach(function (n) { n.classList.add('in'); });
-      }
+      if (!document.querySelector('.rv.in')) nodes.forEach(function (n) { n.classList.add('in'); });
     }, 2500);
   }
 
-  // Printing a hidden section would print blank space.
   window.addEventListener('beforeprint', function () {
     $$('.rv').forEach(function (n) { n.classList.add('in'); });
   });
 
-  /* ============================================================ boot ==== */
-
   function init() {
     if (typeof BRIEF === 'undefined') return;
-    renderMeta();
-    renderObjectives();
-    renderVolume();
-    renderLanguage();
-    renderPriorities();
+    renderNav();
     renderCategories();
-    renderDrone();
-    renderUsage();
-    renderMatrix();
-    renderTimeline();
-    renderTechnical();
+    renderStrips();
     load();
     renderChecklist();
     initNav();
@@ -543,7 +333,5 @@
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  } else { init(); }
 })();

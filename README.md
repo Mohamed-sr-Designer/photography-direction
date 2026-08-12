@@ -1,20 +1,18 @@
 # Real Estate Photography Direction
 
-A premium editorial production brief, built to be sent to an external photographer
-before a shoot. It is a website, not a PDF: one long scrolling document with a
-sticky section nav and an interactive shot checklist.
+An image-led photography shot brief for an external photographer. One scroll:
+the photographer looks at frames and shoots the list. Roughly 800 words on the
+whole page, about ten words per image.
 
-**Images: AI generated direction references.** All 36 reference frames were
-generated with **Google Nano Banana 2** at 1K and enhanced through **Magnific**
-(Precision / photo mode, 2x, zero creativity so nothing is hallucinated into the
-architecture). They are labelled `AI reference` on the page.
+**Images**
+- **Masterplan** — 37 real reference photographs supplied by the art director,
+  grouped into the 8 shot types they demonstrate (`assets/img/plan/`).
+- **Every other category** — AI direction references, labelled `AI` on the frame.
+  Generated with Nano Banana 2, enhanced with Magnific (`ultra-photo`, 2x).
+  Nine later top-ups used Nano Banana 2 Lite with no Magnific pass to save credits.
 
-> These are not photographs of the project and not photographs of any real place.
-> They exist to agree the look, the framing and the light before the shoot.
-> The photographer matches the treatment, not the building.
-
-Any frame can still be swapped for a real photograph, or back to a wireframe, in
-one line — see *Swapping images* below.
+> The AI frames are not photographs of the project and not photographs of any
+> real place. Match the treatment, not the building.
 
 ---
 
