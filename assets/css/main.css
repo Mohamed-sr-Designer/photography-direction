@@ -148,6 +148,20 @@ h1,h2{font-weight:600;line-height:1;letter-spacing:-.04em;font-stretch:94%}
 /* Uniform tile, but the photo is never cropped: it fits inside the frame so
    the photographer sees the real composition and the real aspect ratio. */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.5rem,1.2vw,1rem)}
+
+/* Two named sets side by side inside one section. */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.2rem,3vw,2.8rem)}
+.col__h{
+  display:flex;align-items:center;gap:.6rem;margin-bottom:.8rem;padding-bottom:.6rem;
+  border-bottom:1px solid var(--line-2);
+  font-family:var(--mono);font-size:.64rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+}
+.col__h em{font-style:normal;color:var(--orange);font-size:.58rem}
+.col__h span{
+  margin-left:auto;font-weight:400;letter-spacing:.05em;text-transform:none;
+  color:var(--ink-3);font-size:.66rem;
+}
+.grid--col{grid-template-columns:repeat(2,1fr)}
 .tile{
   position:relative;aspect-ratio:4 / 3;overflow:hidden;
   background:var(--paper-2);border:1px solid var(--line-2);
@@ -212,6 +226,8 @@ h1,h2{font-weight:600;line-height:1;letter-spacing:-.04em;font-stretch:94%}
   .nav__toggle{display:block}
   .rules{grid-template-columns:1fr;gap:2rem}
   .herofoot{grid-template-columns:1fr;gap:1.6rem}
+  .cols{grid-template-columns:1fr;gap:2rem}
+  .grid--col{grid-template-columns:repeat(3,1fr)}
 }
 @media (max-width:640px){
   html{scroll-padding-top:60px}

@@ -30,12 +30,27 @@
 
   function renderSections() {
     set('#sections', SECTIONS.map(function (s) {
-      var tiles = s.images.map(function (src, i) {
-        return '<figure class="tile rv" style="--d:' + (i * 45) + 'ms">' +
-          '<img src="' + esc(src) + '" alt="' + esc(s.title) + ' reference" loading="lazy">' +
-          (s.source === 'ai' ? '<figcaption class="tile__ai">AI reference</figcaption>' : '') +
-        '</figure>';
-      }).join('');
+      function tilesFor(list, alt) {
+        return list.map(function (src, i) {
+          return '<figure class="tile rv" style="--d:' + (i * 45) + 'ms">' +
+            '<img src="' + esc(src) + '" alt="' + esc(alt) + ' reference" loading="lazy">' +
+            (s.source === 'ai' ? '<figcaption class="tile__ai">AI reference</figcaption>' : '') +
+          '</figure>';
+        }).join('');
+      }
+
+      // A section can split its images into named columns shown side by side.
+      var tiles = s.groups
+        ? '<div class="cols">' + s.groups.map(function (g) {
+            return '<section class="col">' +
+              '<h3 class="col__h rv">' + esc(g.label) +
+                '<em>' + g.images.length + '</em>' +
+                '<span>' + esc(g.note) + '</span>' +
+              '</h3>' +
+              '<div class="grid grid--col">' + tilesFor(g.images, g.label) + '</div>' +
+            '</section>';
+          }).join('') + '</div>'
+        : '<div class="grid">' + tilesFor(s.images, s.title) + '</div>';
 
       return '<section class="sec sec--pad sect" id="s' + esc(s.n) + '" data-nav="s' + esc(s.n) + '">' +
         '<div class="shell">' +
@@ -48,7 +63,7 @@
             '</ul>' +
           '</header>' +
           Formula(s.formula) +
-          '<div class="grid">' + tiles + '</div>' +
+          tiles +
         '</div>' +
       '</section>';
     }).join(''));

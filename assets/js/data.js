@@ -30,44 +30,63 @@ const RATIOS = [
 const CASTING = "Everyone in frame is Saudi. Men in white thobe and shemagh, " +
                 "women in abaya. Unposed, mid movement, never facing the lens.";
 
-/* Every section delivers 36 photos. 4 sections = 144 photos per project. */
+/* Every section delivers 30 photos. 3 sections = 90 photos per project. */
 const SECTIONS = [
   {
     n: "01",
     title: "Masterplan",
     body: "Aerial coverage that reads the development as one complete place. " +
-          "Scale, planning, access and the context around it, captured from three " +
-          "altitudes so the set is never the same view repeated.",
-    keywords: ["Aerial", "Scale", "Context", "Access", "Planning"],
+          "Scale, planning, access and the context around it, flown so the set " +
+          "is never the same view repeated.",
+    keywords: ["Aerial", "Scale", "Context", "Mid Shot", "Wide Shot"],
     formula: {
       parts: [
         { v: "3", l: "Angles<br>90° · 45° · Wide" },
-        { v: "2", l: "Light<br>Day · Golden hour" },
+        { v: "2", l: "Shots<br>Mid · Wide" },
         { v: "5", l: "Ratios<br>21:9 · 16:9 · 4:5 · 1:1 · 9:16" }
       ],
       total: 30
     },
-    images: [
-      "assets/img/sec/mp-1.jpg",
-      "assets/img/sec/mp-2.jpg",
-      "assets/img/sec/mp-3.jpg",
-      "assets/img/sec/mp-4.jpg",
-      "assets/img/sec/mp-5.jpg",
-      "assets/img/sec/mp-6.jpg"
+    /* Shown as two columns, side by side. */
+    groups: [
+      {
+        label: "Masterplan",
+        note: "The place as one whole",
+        images: [
+          "assets/img/sec/mp-1.jpg",
+          "assets/img/sec/mp-2.jpg",
+          "assets/img/sec/mp-3.jpg",
+          "assets/img/sec/mp-4.jpg",
+          "assets/img/sec/mp-5.jpg",
+          "assets/img/sec/mp-6.jpg"
+        ]
+      },
+      {
+        label: "Drone",
+        note: "Mid and wide, at 45° and 90°",
+        images: [
+          "assets/img/sec/dr-1.jpg",
+          "assets/img/sec/dr-2.jpg",
+          "assets/img/sec/dr-3.jpg",
+          "assets/img/sec/dr-4.jpg",
+          "assets/img/sec/dr-5.jpg",
+          "assets/img/sec/dr-6.jpg"
+        ]
+      }
     ],
     source: "ai"
   },
   {
     n: "02",
     title: "Architecture",
-    body: "The buildings as designed objects. Verticals stay straight, hero frames " +
-          "keep open space for headlines, and every subject is covered from the full " +
-          "elevation down to the material joint.",
-    keywords: ["Straight Verticals", "Negative Space", "Materials", "Entrance"],
+    body: "The buildings as designed objects. Every frame holds the whole " +
+          "building: full elevations, three quarter views and the setting around " +
+          "it. No close ups in this section.",
+    keywords: ["Full Building", "Straight Verticals", "Negative Space", "Entrance"],
     formula: {
       parts: [
         { v: "3", l: "Angles<br>Front · ¾ · Low" },
-        { v: "2", l: "Distances<br>Wide · Detail" },
+        { v: "2", l: "Distances<br>Wide · Medium" },
         { v: "5", l: "Ratios<br>21:9 · 16:9 · 4:5 · 1:1 · 9:16" }
       ],
       total: 30
@@ -78,70 +97,23 @@ const SECTIONS = [
       "assets/img/sec/ar-3.jpg",
       "assets/img/sec/ar-4.jpg",
       "assets/img/sec/ar-5.jpg",
-      "assets/img/sec/ar-6.jpg"
+      "assets/img/sec/ar-6.jpg",
+      "assets/img/sec/ar-7.jpg",
+      "assets/img/sec/ar-8.jpg",
+      "assets/img/sec/ar-9.jpg",
+      "assets/img/sec/ar-10.jpg",
+      "assets/img/sec/ar-11.jpg",
+      "assets/img/sec/ar-12.jpg"
     ],
     source: "ai"
   },
   {
     n: "03",
-    title: "Interiors",
-    body: "The building from the inside. For an office or headquarters: parking, " +
-          "reception and the working floors. For a villa: the living spaces, the " +
-          "furniture and the open American kitchen. For a compound: the shared " +
-          "amenities. Shoot each space wide, then medium, then the finish detail.",
-    keywords: ["Reception", "Office Floor", "Parking", "Living & Furniture",
-               "American Kitchen", "Amenities"],
-    formula: {
-      parts: [
-        { v: "3", l: "Spaces<br>per property type" },
-        { v: "2", l: "Distances<br>Wide · Detail" },
-        { v: "5", l: "Ratios<br>21:9 · 16:9 · 4:5 · 1:1 · 9:16" }
-      ],
-      total: 30
-    },
-    images: [
-      "assets/img/sec/it-1.jpg",
-      "assets/img/sec/it-2.jpg",
-      "assets/img/sec/it-3.jpg",
-      "assets/img/sec/it-4.jpg",
-      "assets/img/sec/it-5.jpg",
-      "assets/img/sec/it-6.jpg"
-    ],
-    source: "ai"
-  },
-  {
-    n: "04",
-    title: "Drone",
-    body: "The architecture shot from the air. Two shot types only: a mid shot " +
-          "that fills the frame with the building, and a wide shot that places it " +
-          "in its plot. Fly the mid shot at 45° and the wide shot at 90°, and " +
-          "repeat both from three sides of the building.",
-    keywords: ["Mid Shot", "Wide Shot", "45°", "90°", "Rooftop"],
-    formula: {
-      parts: [
-        { v: "3", l: "Sides<br>rotate around" },
-        { v: "2", l: "Shots<br>Mid · Wide" },
-        { v: "5", l: "Ratios<br>21:9 · 16:9 · 4:5 · 1:1 · 9:16" }
-      ],
-      total: 30
-    },
-    images: [
-      "assets/img/sec/dr-1.jpg",
-      "assets/img/sec/dr-2.jpg",
-      "assets/img/sec/dr-3.jpg",
-      "assets/img/sec/dr-4.jpg",
-      "assets/img/sec/dr-5.jpg",
-      "assets/img/sec/dr-6.jpg"
-    ],
-    source: "ai"
-  },
-  {
-    n: "05",
     title: "Lifestyle",
     body: "The project is the hero. People are in the frame to give it scale and " +
           "make it feel used. Everyone is captured mid movement, never posed and " +
           "never looking at the lens.",
-    keywords: ["Saudi Casting", "Unposed", "Human Scale", "Golden Hour"],
+    keywords: ["Unposed", "Human Scale", "Golden Hour", "Landscape"],
     formula: {
       parts: [
         { v: "3", l: "Scenes<br>walkway · plaza · green" },
