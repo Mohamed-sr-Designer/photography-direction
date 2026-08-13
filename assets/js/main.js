@@ -1,7 +1,8 @@
 /* ==========================================================================
    REAL ESTATE PHOTOGRAPHY DIRECTION — UI
-   Four sections. Each one: description, keywords, a formula that computes
-   the photo count, and a uniform image grid. Everything comes from data.js.
+   One page per project. The page sets PROJECT_ID before this script runs;
+   everything else is rendered from PROJECTS in data.js, so all three pages
+   share this file and no markup is duplicated.
    ========================================================================== */
 (function () {
   'use strict';
@@ -14,43 +15,55 @@
   };
   var set = function (sel, html) { var n = $(sel); if (n) n.innerHTML = html; };
 
-  /* ---------------------------------------------------------- sections --- */
+  var project = null;
+
+  /* ------------------------------------------------------------ switcher */
+
+  function renderSwitcher() {
+    set('#projects', PROJECTS.map(function (p) {
+      return '<a class="pswitch__i' + (p.id === project.id ? ' is-on' : '') + '" href="' + esc(p.file) + '">' +
+        '<b>' + esc(p.name) + '</b><span>' + esc(p.type) + '</span></a>';
+    }).join(''));
+  }
+
+  /* -------------------------------------------------------------- header */
+
+  function renderHead() {
+    var k = $('#heroKick');
+    if (k) k.textContent = META.document + ' · ' + META.version + ' · ' + META.date;
+
+    var t = $('#heroTitle');
+    if (t) t.innerHTML = esc(project.name) + '<br><span class="is-accent">' + esc(project.nameAr) + '</span>';
+
+    var l = $('#heroLede'); if (l) l.textContent = project.lede;
+
+    set('#heroFacts', [project.type, project.place].concat(project.facts)
+      .map(function (f) { return '<li>' + esc(f) + '</li>'; }).join(''));
+
+    document.title = project.name + ' — Photography Direction';
+  }
+
+  /* ------------------------------------------------------------ sections */
 
   function Formula(f) {
-    var parts = f.parts.map(function (p, i) {
-      return (i ? '<span class="fx__op">&times;</span>' : '') +
-        '<span class="fx__part"><b>' + esc(p.v) + '</b><i>' + p.l + '</i></span>';
-    }).join('');
-
-    return '<div class="fx rv">' + parts +
+    return '<div class="fx rv">' +
+      f.parts.map(function (p, i) {
+        return (i ? '<span class="fx__op">&times;</span>' : '') +
+          '<span class="fx__part"><b>' + esc(p.v) + '</b><i>' + p.l + '</i></span>';
+      }).join('') +
       '<span class="fx__op fx__op--eq">=</span>' +
       '<span class="fx__total"><b>' + f.total + '</b><i>Photos</i></span>' +
     '</div>';
   }
 
   function renderSections() {
-    set('#sections', SECTIONS.map(function (s) {
-      function tilesFor(list, alt) {
-        return list.map(function (src, i) {
-          return '<figure class="tile rv" style="--d:' + (i * 45) + 'ms">' +
-            '<img src="' + esc(src) + '" alt="' + esc(alt) + ' reference" loading="lazy">' +
-            (s.source === 'ai' ? '<figcaption class="tile__ai">AI reference</figcaption>' : '') +
-          '</figure>';
-        }).join('');
-      }
-
-      // A section can split its images into named columns shown side by side.
-      var tiles = s.groups
-        ? '<div class="cols">' + s.groups.map(function (g) {
-            return '<section class="col">' +
-              '<h3 class="col__h rv">' + esc(g.label) +
-                '<em>' + g.images.length + '</em>' +
-                '<span>' + esc(g.note) + '</span>' +
-              '</h3>' +
-              '<div class="grid grid--col">' + tilesFor(g.images, g.label) + '</div>' +
-            '</section>';
-          }).join('') + '</div>'
-        : '<div class="grid">' + tilesFor(s.images, s.title) + '</div>';
+    set('#sections', project.sections.map(function (s) {
+      var tiles = s.images.map(function (src, i) {
+        return '<figure class="tile rv" style="--d:' + (i * 45) + 'ms">' +
+          '<img src="' + esc(src) + '" alt="' + esc(s.title) + ' reference" loading="lazy">' +
+          '<figcaption class="tile__ai">Reference</figcaption>' +
+        '</figure>';
+      }).join('');
 
       return '<section class="sec sec--pad sect" id="s' + esc(s.n) + '" data-nav="s' + esc(s.n) + '">' +
         '<div class="shell">' +
@@ -63,71 +76,67 @@
             '</ul>' +
           '</header>' +
           Formula(s.formula) +
-          tiles +
+          '<div class="grid">' + tiles + '</div>' +
         '</div>' +
       '</section>';
     }).join(''));
   }
 
-  /* --------------------------------------------------------------- nav --- */
+  /* ---------------------------------------------------------------- nav */
 
   function renderNav() {
-    var items = SECTIONS.map(function (s) {
-      return '<a class="nav__link" href="#s' + esc(s.n) + '">' +
-        '<em>' + esc(s.n) + '</em>' + esc(s.title) + '</a>';
-    }).join('') + '<a class="nav__link" href="#rules"><em>—</em>Rules</a>';
-    set('#navLinks', items);
-    set('#drawerList', SECTIONS.map(function (s) {
-      return '<li><a href="#s' + esc(s.n) + '"><em>' + esc(s.n) + '</em>' + esc(s.title) +
-             '<b>' + s.formula.total + '</b></a></li>';
-    }).join('') + '<li><a href="#rules"><em>—</em>Rules</a></li>');
+    set('#navLinks', project.sections.map(function (s) {
+      return '<a class="nav__link" href="#s' + esc(s.n) + '"><em>' + esc(s.n) + '</em>' + esc(s.title) + '</a>';
+    }).join('') + '<a class="nav__link" href="#rules"><em>—</em>Rules</a>');
+
+    set('#drawerList',
+      PROJECTS.map(function (p) {
+        return '<li class="drawer__p' + (p.id === project.id ? ' is-on' : '') + '">' +
+          '<a href="' + esc(p.file) + '"><em>' + (p.id === project.id ? '●' : '○') + '</em>' +
+          esc(p.name) + '<b>' + p.total + '</b></a></li>';
+      }).join('') +
+      '<li class="drawer__sep"></li>' +
+      project.sections.map(function (s) {
+        return '<li><a href="#s' + esc(s.n) + '"><em>' + esc(s.n) + '</em>' + esc(s.title) +
+               '<b>' + s.formula.total + '</b></a></li>';
+      }).join('') +
+      '<li><a href="#rules"><em>—</em>Rules</a></li>');
   }
 
-  /* ------------------------------------------------------------- rules --- */
+  /* -------------------------------------------------------------- strips */
 
-  function renderRules() {
-    set('#light', RULES.light.map(function (l) {
-      return '<li><b>' + esc(l.t) + '</b><i>' + esc(l.f) + '</i></li>';
+  function renderStrips() {
+    set('#ratios', RATIOS.map(function (x) {
+      return '<figure class="rf"><div class="rf__box" style="--ar:' + x.r.replace(':', ' / ') + '">' +
+        esc(x.r) + '</div><figcaption>' + esc(x.l) + '</figcaption></figure>';
     }).join(''));
-
-    set('#ratios', RATIOS.map(function (r) {
-      return '<figure class="rf"><div class="rf__box" style="--ar:' + r.r.replace(':', ' / ') + '">' +
-        esc(r.r) + '</div><figcaption>' + esc(r.l) + '</figcaption></figure>';
-    }).join(''));
-
-    var li = function (t) { return '<li>' + esc(t) + '</li>'; };
-    set('#deliver', RULES.deliver.map(li).join(''));
 
     var cast = $('#casting'); if (cast) cast.textContent = CASTING;
 
-    var k = $('#heroKick');
-    if (k) k.textContent = META.document + ' · ' + META.version + ' · ' + META.date;
+    set('#light', RULES.light.map(function (l) {
+      return '<li><b>' + esc(l.t) + '</b><i>' + esc(l.f) + '</i></li>';
+    }).join(''));
+    set('#deliver', RULES.deliver.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join(''));
 
-    // Counted from the data so adding a section can never leave this stale.
-    var words = ['Zero','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten'];
-    var lede = $('#heroLede');
-    if (lede) {
-      lede.textContent = (words[SECTIONS.length] || SECTIONS.length) + ' sections. ' +
-                         SECTIONS[0].formula.total + ' photos each.';
-    }
-
-    // Final tally, added up from the sections rather than typed in.
+    // Totals, added up from the sections rather than typed in.
     set('#total',
       '<div class="total__sum rv">' +
-        '<span class="total__part"><b>' + SECTIONS.length + '</b><i>Sections</i></span>' +
+        '<span class="total__part"><b>' + project.sections.length + '</b><i>Sections</i></span>' +
         '<span class="total__op">&times;</span>' +
-        '<span class="total__part"><b>' + SECTIONS[0].formula.total + '</b><i>Photos each</i></span>' +
+        '<span class="total__part"><b>' + project.sections[0].formula.total + '</b><i>Photos each</i></span>' +
         '<span class="total__op total__op--eq">=</span>' +
-        '<span class="total__grand"><b>' + TOTAL + '</b><i>Photos per project</i></span>' +
+        '<span class="total__grand"><b>' + project.total + '</b><i>Photos · ' + esc(project.name) + '</i></span>' +
       '</div>' +
       '<ul class="total__rows rv">' +
-        SECTIONS.map(function (s) {
+        project.sections.map(function (s) {
           return '<li><em>' + esc(s.n) + '</em>' + esc(s.title) + '<b>' + s.formula.total + '</b></li>';
         }).join('') +
-      '</ul>');
+      '</ul>' +
+      '<p class="total__all rv">All three projects together: <b>' +
+        PROJECTS.reduce(function (n, p) { return n + p.total; }, 0) + '</b> photos.</p>');
   }
 
-  /* --------------------------------------------------------- behaviour --- */
+  /* ----------------------------------------------------------- behaviour */
 
   function initNav() {
     var nav = $('#nav'), toggle = $('#navToggle'), drawer = $('#drawer');
@@ -194,10 +203,15 @@
   });
 
   function init() {
-    if (typeof SECTIONS === 'undefined') return;
+    if (typeof PROJECTS === 'undefined') return;
+    var id = (typeof PROJECT_ID !== 'undefined') ? PROJECT_ID : PROJECTS[0].id;
+    project = PROJECTS.filter(function (p) { return p.id === id; })[0] || PROJECTS[0];
+
+    renderSwitcher();
+    renderHead();
     renderNav();
     renderSections();
-    renderRules();
+    renderStrips();
     initNav();
     initReveal();
   }

@@ -1,57 +1,26 @@
 # Real Estate Photography Direction
 
-A photography direction deck for an external photographer. Four sections, one
-scroll, ~460 words. Structure follows the supplied reference deck:
+A photography brief with **one page per project**, switched from the header.
+Each section is a number, a short description, keywords, and a formula that
+computes its photo count. The formula is the shot list.
 
-> number + title → short description → **keywords** → a **formula** that
-> computes the photo count → a uniform image grid.
+| Page | Project | Type | Place | Photos |
+|---|---|---|---|---|
+| `index.html` | Baleine Bleu Maison | Commercial tower, 24 floors | Al Sahafa, Riyadh | 90 |
+| `almosa.html` | Almosa Residence 2 | 14 apartments | Tuwaiq, south Riyadh | 90 |
+| `woroud.html` | Woroud Almosa | Land scheme, 809,599 m² | Al Worood, north Jazan | 90 |
+| | | | **Total** | **270** |
 
-The formula is the shot list. It says how many subjects, in which orientations,
-from which angles — so nothing needs a written shot-by-shot list.
+Every section is `3 × 2 × 5 = 30`. The five delivery ratios are a counted
+factor, because the brief requires each hero subject shot in all five on
+location rather than cropped afterwards.
 
-| Section | Formula | Photos |
-|---|---|---|
-| 01 Masterplan (incl. drone) | 3 angles × 2 shots (mid/wide) × 5 ratios | 30 |
-| 02 Architecture | 3 angles × 2 distances × 5 ratios | 30 |
-| 03 Lifestyle | 3 scenes × 2 versions × 5 ratios | 30 |
-| **Total** | | **90** |
+Sections are drawn from what each landing page actually has to fill, so the
+counts map to real slots:
 
-The five delivery ratios are a counted factor in every formula, because the
-brief requires each hero subject to be shot in all five on location rather than
-cropped afterwards.
-
----
-
-## Casting
-
-Everyone appearing in frame is Saudi: men in white thobe and shemagh, women in
-abaya. Unposed, mid movement, never facing the lens. This is stated in the hero
-so it is read before any section.
-
-## Images
-
-24 images, six per section. Each sits in the same 4:3 tile, but the photo is
-**fitted, never cropped** — the photographer sees the real composition and the
-real aspect ratio of every reference.
-
-- **Masterplan** — real reference photographs supplied by the
-  art director. Filtered down from 63: thumbnails under 600 px were dropped, and
-  so was every frame carrying a listing overlay, a polygon markup, an agency logo
-  or a visible watermark. Those are sales graphics, not photography references.
-- **Architecture, Interiors and Lifestyle** — AI direction references, labelled
-  `AI reference` on the tile. Generated with Nano Banana 2, enhanced with
-  Magnific (`ultra-photo`, 2x); later top-ups used Nano Banana 2 Lite with no
-  Magnific pass to save credits.
-
-> The AI frames are not photographs of the project and not photographs of any
-> real place. Match the treatment, not the building.
-
-`assets/img/` also holds generated frames not currently placed in the deck
-(`ref/`, `masterplan/`, `land/`, `location/`, `investment/`, `details/`,
-`drone/`, `night/`). They are kept so any section can be re-imaged without
-spending credits again.
-
----
+- **Baleine** — The Tower · Arrival · Position (vertical building, lobby, corridor)
+- **Almosa** — The Building · Unit Types · Neighbourhood (finished block, A/B/C, street)
+- **Woroud** — The Scheme · Plots & Services · Context (no building exists yet)
 
 ## Run it
 
@@ -59,37 +28,20 @@ spending credits again.
 npx -y serve photo-direction -l 4650
 ```
 
-Registered in `.claude/launch.json` as `photo-direction`, port **4650**.
-No build step, no dependencies.
+## Images
 
-## Files
+All frames are **1200 × 900 (4:3)**, matching the card exactly, so each fills
+its card with nothing cropped and no letterboxing.
 
-```
-index.html            page shell, everything else is generated
-assets/css/main.css   design system
-assets/js/data.js     ALL content — sections, formulas, image lists, rules
-assets/js/main.js     renderer, nav, reveal
-```
+- `assets/img/land/` — supplied masterplan photography, used for Woroud Almosa
+- `assets/img/tower/` — generated tower set for Baleine
+- `assets/img/sec/` — generated Saudi architecture, drone and lifestyle frames
+
+Generated frames are labelled `Reference` on the tile. They are direction
+references, not photographs of the projects.
 
 ## Editing
 
-Everything lives in `assets/js/data.js`.
-
-- **Change a count** — edit that section's `formula.parts` and `total`.
-  The hero total adds itself up from the sections.
-- **Swap an image** — point the path in that section's `images` array at a new
-  file. Six per section keeps the grid even.
-- **Add a section** — append to `SECTIONS`; the nav, drawer and total follow.
-- **Mark a section's images as real photography** — set `source` to anything
-  other than `"ai"` and the `AI reference` badge disappears.
-
-## Brand
-
-Osolutions: navy `#11253E`, deep `#0C1B2E`, orange `#F76302`, Archivo +
-IBM Plex Mono. Logo from `art-lead-review/assets/img/`.
-
-## Notes
-
-- Prints cleanly; respects `prefers-reduced-motion`.
-- `noindex` — the supplied reference photographs are third-party material, so
-  keep the page unindexed and check rights before any client-facing use.
+Everything lives in `assets/js/data.js` — `PROJECTS` holds the three briefs.
+Adding a project means adding an entry plus a copy of `index.html` with a
+different `PROJECT_ID`. Totals and the section count are derived from the data.
